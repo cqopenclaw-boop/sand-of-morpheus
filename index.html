@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sand of Morpheus - Time Travel Trading</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1a1a2e;
+            color: #eee;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-align: center;
+            text-shadow: 0 0 10px #00d4aa;
+        }
+        
+        .subtitle {
+            color: #888;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .stats-bar {
+            background: #16213e;
+            border: 2px solid #00d4aa;
+            border-radius: 8px;
+            padding: 15px 30px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 40px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            color: #ffd700;
+        }
+        
+        .stat-label {
+            font-size: 0.7rem;
+            color: #888;
+        }
+        
+        .eras-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 900px;
+        }
+        
+        .era {
+            background: #16213e;
+            border: 2px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            width: 260px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .era.active {
+            border-color: #00d4aa;
+            box-shadow: 0 0 20px rgba(0, 212, 170, 0.3);
+        }
+        
+        .era-header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .era-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .era-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        
+        .era-year {
+            font-size: 0.75rem;
+            color: #888;
+        }
+        
+        .resource-display {
+            background: #0f0f23;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .resource-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .resource-name {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        
+        .resource-amount {
+            font-size: 1.8rem;
+            color: #00d4aa;
+            font-weight: bold;
+        }
+        
+        .resource-price {
+            font-size: 0.75rem;
+            color: #ffd700;
+            margin-top: 5px;
+        }
+        
+        .trade-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .trade-btn {
+            background: #00d4aa;
+            border: none;
+            color: #1a1a2e;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        
+        .trade-btn:hover:not(:disabled) {
+            background: #00f5c4;
+            transform: translateY(-2px);
+        }
+        
+        .trade-btn:disabled {
+            background: #333;
+            color: #666;
+            cursor: not-allowed;
+        }
+        
+        .trade-btn.buy {
+            background: #4ade80;
+        }
+        
+        .trade-btn.sell {
+            background: #f97316;
+        }
+        
+        .travel-btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 12px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .travel-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+        
+        .travel-btn:disabled {
+            background: #333;
+            cursor: not-allowed;
+        }
+        
+        .cooldown-bar {
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        
+        .cooldown-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            transition: width 0.1s linear;
+        }
+        
+        .log-section {
+            margin-top: 25px;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .log-title {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+        
+        .log-entries {
+            background: #0f0f23;
+            border-radius: 8px;
+            padding: 15px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        
+        .log-entry {
+            font-size: 0.8rem;
+            padding: 5px 0;
+            border-bottom: 1px solid #222;
+            color: #aaa;
+        }
+        
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+        
+        .log-entry .era-tag {
+            color: #00d4aa;
+        }
+        
+        .log-entry .buy-tag {
+            color: #4ade80;
+        }
+        
+        .log-entry .sell-tag {
+            color: #f97316;
+        }
+        
+        .log-entry .travel-tag {
+            color: #8b5cf6;
+        }
+        
+        .instructions {
+            margin-top: 20px;
+            background: #16213e;
+            border-radius: 8px;
+            padding: 15px;
+            max-width: 800px;
+            font-size: 0.8rem;
+            color: #888;
+            line-height: 1.6;
+        }
+        
+        .instructions h3 {
+            color: #00d4aa;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .timeline-hint {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .repair-panel {
+            margin-top: 20px;
+            background: linear-gradient(135deg, #1e3a5f, #16213e);
+            border: 2px solid #00d4aa;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .repair-title {
+            font-size: 1rem;
+            color: #00d4aa;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .repair-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .repair-btn {
+            background: #0f3460;
+            border: 2px solid #e94560;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .repair-btn:hover:not(:disabled) {
+            background: #e94560;
+            transform: translateY(-2px);
+        }
+
+        .repair-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .repair-cost {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .repair-effect {
+            color: #4ade80;
+            font-size: 0.75rem;
+        }
+
+        .stability-warning {
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+            border-radius: 6px;
+            color: #ef4444;
+            font-size: 0.85rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+    <h1>⏳ Sand of Morpheus</h1>
+    <div class="subtitle">A Time Travel Trading Game</div>
+    
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-value" id="gold">100</div>
+            <div class="stat-label">Gold</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value" id="trades">0</div>
+            <div class="stat-label">Trades</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value" id="stability">100</div>
+            <div class="stat-label">Timeline Stability</div>
+        </div>
+    </div>
+    
+    <div id="stability-bar" style="width: 100%; max-width: 800px; height: 8px; background: #333; border-radius: 4px; margin-bottom: 20px; overflow: hidden;">
+        <div id="stability-fill" style="height: 100%; width: 100%; background: linear-gradient(90deg, #4ade80, #fbbf24, #ef4444); transition: width 0.3s;"></div>
+    </div>
+    
+    <div class="eras-container" id="eras">
+        <!-- Eras will be rendered here -->
+    </div>
+    
+    <div class="timeline-hint">
+        💡 Trade low in one era, travel to another, sell high!
+    </div>
+
+    <div class="repair-panel" id="repair-panel" style="display: none;">
+        <div class="repair-title">🔧 Timeline Repair Station</div>
+        <div class="repair-options" id="repair-options">
+            <button class="repair-btn" onclick="repairTimeline(10, 20)" id="repair-small">
+                <span>Quick Fix</span>
+                <span class="repair-cost">💰 20g</span>
+                <span class="repair-effect">+10% Stability</span>
+            </button>
+            <button class="repair-btn" onclick="repairTimeline(25, 50)" id="repair-medium">
+                <span>Era Lock</span>
+                <span class="repair-cost">💰 50g</span>
+                <span class="repair-effect">+25% Stability</span>
+            </button>
+            <button class="repair-btn" onclick="repairTimeline(50, 100)" id="repair-large">
+                <span>Timeline Reset</span>
+                <span class="repair-cost">💰 100g</span>
+                <span class="repair-effect">+50% Stability</span>
+            </button>
+        </div>
+        <div class="stability-warning" id="stability-warning" style="display: none;">
+            ⚠️ Timeline Critical! Prices extremely volatile. Repair now!
+        </div>
+        <div class="stability-warning" id="paradox-warning" style="display: none; background: rgba(139, 92, 246, 0.3); border-color: #8b5cf6; color: #a78bfa;">
+            💥 PARADOX IMMINENT! 0% Stability = Resource Swap + Price Inversion!
+        </div>
+    </div>
+    
+    <div class="log-section">
+        <div class="log-title">📜 Timeline Log</div>
+        <div class="log-entries" id="log">
+            <div class="log-entry">Game started. Choose an era and start trading!</div>
+        </div>
+    </div>
+    
+    <div class="instructions">
+        <h3>🎮 How to Play</h3>
+        <p>• <strong>Buy</strong> resources when cheap in one era</p>
+        <p>• <strong>Travel</strong> to another era (cooldown: 3 seconds)</p>
+        <p>• <strong>Sell</strong> resources for profit</p>
+        <p>• <strong>Build wealth</strong> across time!</p>
+        <p>• <strong>Watch out</strong> — prices fluctuate randomly!</p>
+        <p>• <strong>⚠️ Timeline Stability:</strong> Each travel destabilizes the timeline. Low stability = chaotic prices!</p>
+        <p>• <strong>💥 Paradox Events:</strong> At 0% stability, resources SWAP between eras and prices INVERT!</p>
+    </div>
+    
+    <script>
+        // Game State
+        const game = {
+            gold: 100,
+            trades: 0,
+            stability: 100,
+            currentEra: 0,
+            cooldown: 0,
+            eras: [
+                {
+                    id: 'jurassic',
+                    name: 'Jurassic',
+                    year: '150M BC',
+                    icon: '🦕',
+                    resource: 'Fossils',
+                    resourceIcon: '🦴',
+                    amount: 0,
+                    basePrice: 5,
+                    price: 5
+                },
+                {
+                    id: 'rome',
+                    name: 'Ancient Rome',
+                    year: '50 AD',
+                    icon: '🏛️',
+                    resource: 'Art',
+                    resourceIcon: '🏺',
+                    amount: 0,
+                    basePrice: 20,
+                    price: 20
+                },
+                {
+                    id: 'modern',
+                    name: '2020s',
+                    year: '2024 AD',
+                    icon: '🏙️',
+                    resource: 'Tech',
+                    resourceIcon: '💻',
+                    amount: 0,
+                    basePrice: 50,
+                    price: 50
+                },
+                {
+                    id: 'future',
+                    name: '2100+',
+                    year: '2150 AD',
+                    icon: '🚀',
+                    resource: 'Energy',
+                    resourceIcon: '⚡',
+                    amount: 0,
+                    basePrice: 100,
+                    price: 100
+                }
+            ],
+            log: []
+        };
+        
+        // Render the game
+        function render() {
+            const erasContainer = document.getElementById('eras');
+            erasContainer.innerHTML = '';
+            
+            game.eras.forEach((era, index) => {
+                const isActive = index === game.currentEra;
+                const canBuy = game.gold >= era.price;
+                const canSell = era.amount > 0;
+                const canTravel = game.cooldown <= 0 && index !== game.currentEra;
+                
+                const eraDiv = document.createElement('div');
+                eraDiv.className = `era ${isActive ? 'active' : ''}`;
+                eraDiv.innerHTML = `
+                    <div class="era-header">
+                        <span class="era-icon">${era.icon}</span>
+                        <div class="era-name">${era.name}</div>
+                        <div class="era-year">${era.year}</div>
+                    </div>
+                    <div class="resource-display">
+                        <span class="resource-icon">${era.resourceIcon}</span>
+                        <div class="resource-name">${era.resource}</div>
+                        <div class="resource-amount">${era.amount}</div>
+                        <div class="resource-price">💰 ${era.price} gold</div>
+                    </div>
+                    <div class="trade-section">
+                        <button class="trade-btn buy" onclick="buy(${index})" ${!canBuy ? 'disabled' : ''}>
+                            Buy 1 (${era.price}g)
+                        </button>
+                        <button class="trade-btn sell" onclick="sell(${index})" ${!canSell ? 'disabled' : ''}>
+                            Sell 1 (${era.price}g)
+                        </button>
+                        <button class="travel-btn" onclick="travel(${index})" ${!canTravel ? 'disabled' : ''}>
+                            ${!canTravel && game.cooldown > 0 ? `Cooldown: ${game.cooldown}s` : '⏰ Travel Here'}
+                        </button>
+                        ${game.cooldown > 0 && isActive ? `
+                            <div class="cooldown-bar">
+                                <div class="cooldown-fill" style="width: ${(game.cooldown / 30) * 100}%"></div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+                erasContainer.appendChild(eraDiv);
+            });
+            
+            // Update stats
+            document.getElementById('gold').textContent = game.gold;
+            document.getElementById('trades').textContent = game.trades;
+            document.getElementById('stability').textContent = game.stability + '%';
+            
+            // Update stability bar
+            const stabilityFill = document.getElementById('stability-fill');
+            stabilityFill.style.width = game.stability + '%';
+            
+            // Color based on stability
+            if (game.stability > 60) {
+                stabilityFill.style.background = '#4ade80';
+            } else if (game.stability > 30) {
+                stabilityFill.style.background = '#fbbf24';
+            } else {
+                stabilityFill.style.background = '#ef4444';
+            }
+            
+            // Update log
+            const logDiv = document.getElementById('log');
+            logDiv.innerHTML = game.log.slice(-20).map(entry => `
+                <div class="log-entry">${entry}</div>
+            `).join('');
+
+            // Update repair panel
+            updateRepairPanel();
+        }
+        
+        // Buy resource
+        function buy(eraIndex) {
+            const era = game.eras[eraIndex];
+            if (game.gold >= era.price) {
+                game.gold -= era.price;
+                era.amount++;
+                game.trades++;
+                addLog(`<span class="era-tag">${era.icon} ${era.name}</span>: Bought 1 <span class="buy-tag">${era.resourceIcon}</span> for ${era.price}g`);
+                render();
+            }
+        }
+        
+        // Sell resource
+        function sell(eraIndex) {
+            const era = game.eras[eraIndex];
+            if (era.amount > 0) {
+                game.gold += era.price;
+                era.amount--;
+                game.trades++;
+                addLog(`<span class="era-tag">${era.icon} ${era.name}</span>: Sold 1 <span class="sell-tag">${era.resourceIcon}</span> for ${era.price}g`);
+                render();
+            }
+        }
+        
+        // Travel to era
+        function travel(eraIndex) {
+            if (game.cooldown <= 0 && eraIndex !== game.currentEra) {
+                const oldEra = game.eras[game.currentEra];
+                const newEra = game.eras[eraIndex];
+                
+                game.currentEra = eraIndex;
+                game.cooldown = 3; // 3 second cooldown
+                addLog(`<span class="travel-tag">⏰</span> Traveled from ${oldEra.icon} to ${newEra.icon} ${newEra.name}`);
+                
+                // Traveling destabilizes the timeline!
+                game.stability = Math.max(0, game.stability - 5);
+                if (game.stability < 30) {
+                    addLog(`⚠️ <span class="sell-tag">Timeline unstable!</span> Prices becoming chaotic...`);
+                }
+                
+                // Fluctuate prices on travel (more volatile when unstable)
+                fluctuatePrices();
+                
+                render();
+                startCooldown();
+            }
+        }
+        
+        // Start cooldown timer
+        function startCooldown() {
+            if (game.cooldown > 0) {
+                game.cooldown--;
+                render();
+                setTimeout(startCooldown, 1000);
+            }
+        }
+        
+        // Randomly fluctuate prices (affected by timeline stability)
+        function fluctuatePrices() {
+            const volatility = Math.max(5, 20 - (game.stability / 5)); // More unstable = more volatile
+            const instabilityBonus = game.stability < 50 ? Math.floor(Math.random() * 15) : 0;
+            
+            game.eras.forEach(era => {
+                const fluctuation = Math.floor(Math.random() * volatility * 2) - volatility;
+                const newPrice = Math.max(1, era.basePrice + fluctuation + instabilityBonus);
+                if (newPrice !== era.price) {
+                    const direction = newPrice > era.price ? '📈' : '📉';
+                    era.price = newPrice;
+                    addLog(`${direction} ${era.icon} ${era.name}: ${era.resource} now costs ${era.price}g`);
+                }
+            });
+        }
+        
+        // Add log entry
+        function addLog(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            game.log.push(`[${timestamp}] ${message}`);
+        }
+        
+        // Initialize game
+        render();
+        addLog('🗺️ Welcome to Sand of Morpheus!');
+        addLog('💡 Buy low, travel, sell high!');
+
+        // Update repair panel visibility
+        function updateRepairPanel() {
+            const panel = document.getElementById('repair-panel');
+            const warning = document.getElementById('stability-warning');
+            const paradoxWarning = document.getElementById('paradox-warning');
+            const smallBtn = document.getElementById('repair-small');
+            const mediumBtn = document.getElementById('repair-medium');
+            const largeBtn = document.getElementById('repair-large');
+
+            // Show panel if stability < 100%
+            panel.style.display = game.stability < 100 ? 'block' : 'none';
+
+            // Show warning if critical
+            warning.style.display = game.stability < 30 && game.stability > 0 ? 'block' : 'none';
+
+            // Show paradox warning if stability = 0
+            if (paradoxWarning) {
+                paradoxWarning.style.display = game.stability <= 0 ? 'block' : 'none';
+            }
+
+            // Disable buttons if not enough gold
+            smallBtn.disabled = game.gold < 20;
+            mediumBtn.disabled = game.gold < 50;
+            largeBtn.disabled = game.gold < 100;
+        }
+
+        // Repair timeline stability
+        function repairTimeline(amount, cost) {
+            if (game.gold >= cost && game.stability < 100) {
+                game.gold -= cost;
+                game.stability = Math.min(100, game.stability + amount);
+                addLog(`🔧 <span class="buy-tag">Timeline Repaired!</span> +${amount}% stability restored for ${cost}g`);
+
+                // Reduce price volatility after repair
+                if (game.stability >= 70) {
+                    game.eras.forEach(era => {
+                        era.price = era.basePrice;
+                    });
+                    addLog(`✨ Timeline stabilized. Prices normalizing...`);
+                }
+
+                // Reset paradox flag if stability restored above threshold
+                if (game.stability > 20) {
+                    game.paradoxTriggered = false;
+                }
+
+                render();
+            }
+        }
+
+        // PARADOX EVENT: Triggered when stability hits 0%
+        function triggerParadoxEvent() {
+            addLog(`💥 <span class="sell-tag">PARADOX EVENT!</span> Timeline shattered!`);
+
+            // Randomly swap resources between eras
+            const shuffledEras = [...game.eras].sort(() => Math.random() - 0.5);
+            shuffledEras.forEach((era, index) => {
+                const targetEra = game.eras[index];
+                const tempAmount = era.amount;
+                era.amount = targetEra.amount;
+                targetEra.amount = tempAmount;
+                addLog(`🔄 ${era.icon} ${era.name}: Resources swapped with ${targetEra.icon} ${targetEra.name}!`);
+            });
+
+            // Invert prices
+            game.eras.forEach(era => {
+                const oldPrice = era.price;
+                // Calculate inverted price (inverse ratio to base price)
+                const inversionFactor = 150 / era.basePrice; // Higher base = lower inverted
+                era.price = Math.max(1, Math.floor(oldPrice * inversionFactor));
+                addLog(`📊 ${era.icon} ${era.name}: Prices INVERTED! Now ${era.price}g (was ${oldPrice}g)`);
+            });
+
+            // Bonus: Everyone gets a small amount of gold (temporal compensation)
+            const goldBonus = 25;
+            game.gold += goldBonus;
+            addLog(`💰 <span class="buy-tag">Temporally Compensated!</span> +${goldBonus}g for paradox survival`);
+
+            addLog(`⚠️ Paradox event complete. Timeline highly unstable!`);
+        }
+
+        // Check for paradox conditions
+        function checkParadoxConditions() {
+            if (game.stability <= 0 && !game.paradoxTriggered) {
+                game.paradoxTriggered = true;
+                triggerParadoxEvent();
+                // Paradox costs stability - can't go below 0
+                game.stability = 0;
+            }
+        }
+
+        // Modify travel to check for paradox
+        const originalTravel = travel;
+        function travel(eraIndex) {
+            if (game.cooldown <= 0 && eraIndex !== game.currentEra) {
+                const oldEra = game.eras[game.currentEra];
+                const newEra = game.eras[eraIndex];
+
+                game.currentEra = eraIndex;
+                game.cooldown = 3;
+                addLog(`<span class="travel-tag">⏰</span> Traveled from ${oldEra.icon} to ${newEra.icon} ${newEra.name}`);
+
+                game.stability = Math.max(0, game.stability - 5);
+
+                if (game.stability < 30) {
+                    addLog(`⚠️ <span class="sell-tag">Timeline unstable!</span> Prices becoming chaotic...`);
+                }
+
+                checkParadoxConditions();
+                fluctuatePrices();
+
+                render();
+                startCooldown();
+            }
+        }
+
+        // Paradox tracker (add to game state)
+        game.paradoxTriggered = false;
+
+        // Paradox Survivor Ability System
+        game.paradoxSurvivorCount = 0;
+        game.hasSurvivorAbility = false;
+
+        // Add survivor ability UI
+        function addSurvivorAbilityUI() {
+            const panel = document.getElementById('repair-panel');
+            const abilitySection = document.createElement('div');
+            abilitySection.id = 'survivor-ability';
+            abilitySection.className = 'repair-title';
+            abilitySection.style.marginTop = '15px';
+            abilitySection.style.borderTop = '1px solid #333';
+            abilitySection.style.paddingTop = '15px';
+            abilitySection.innerHTML = `
+                <div style="color: #a78bfa; font-size: 0.9rem; margin-bottom: 10px;">
+                    💫 Paradox Survivor Ability
+                </div>
+                <button class="repair-btn" onclick="activateSurvivorAbility()" id="survivor-btn" ${!game.hasSurvivorAbility ? 'disabled style="opacity: 0.5;"' : ''}>
+                    <span>⏪ Temporal Recall</span>
+                    <span style="color: #4ade80; font-size: 0.75rem;">1 FREE Travel</span>
+                </button>
+                <div style="color: #888; font-size: 0.7rem; margin-top: 8px;">
+                    Survived ${game.paradoxSurvivorCount} paradox${game.paradoxSurvivorCount !== 1 ? 'es' : ''}
+                </div>
+            `;
+            panel.querySelector('.repair-options').appendChild(abilitySection);
+        }
+
+        // Activate survivor ability (free travel)
+        function activateSurvivorAbility() {
+            if (game.hasSurvivorAbility) {
+                game.hasSurvivorAbility = false;
+                game.cooldown = 0; // Remove travel cooldown
+                addLog(`💫 <span class="buy-tag">Temporal Recall!</span> Free travel activated!`);
+                render();
+            }
+        }
+
+        // Grant survivor ability after paradox
+        function grantSurvivorAbility() {
+            game.paradoxSurvivorCount++;
+            game.hasSurvivorAbility = true;
+            addLog(`🏆 <span class="era-tag">PARADOX SURVIVOR!</span> Earned "Temporal Recall" ability (1 free travel)!`);
+            render();
+        }
+
+        // Modify paradox event to grant ability
+        const originalParadox = triggerParadoxEvent;
+        function triggerParadoxEvent() {
+            originalParadox();
+            grantSurvivorAbility();
+        }
+
+        // Initialize survivor ability UI after load
+        setTimeout(addSurvivorAbilityUI, 100);
+    </script>
+</body>
+</html>
