@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sand of Morpheus - Time Travel Trading</title>
+    <title>Morpheus Matcha — Time Travelers Cafe</title>
     <style>
         * {
             margin: 0;
@@ -12,823 +12,880 @@
         }
         
         body {
-            font-family: 'Courier New', monospace;
-            background: #1a1a2e;
-            color: #eee;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e8d5b7;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            overflow-x: hidden;
         }
         
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            text-align: center;
-            text-shadow: 0 0 10px #00d4aa;
-        }
-        
-        .subtitle {
-            color: #888;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-        }
-        
-        .stats-bar {
-            background: #16213e;
-            border: 2px solid #00d4aa;
-            border-radius: 8px;
-            padding: 15px 30px;
-            margin-bottom: 20px;
-            display: flex;
-            gap: 40px;
-        }
-        
-        .stat {
-            text-align: center;
-        }
-        
-        .stat-value {
-            font-size: 1.5rem;
-            color: #ffd700;
-        }
-        
-        .stat-label {
-            font-size: 0.7rem;
-            color: #888;
-        }
-        
-        .eras-container {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 900px;
-        }
-        
-        .era {
-            background: #16213e;
-            border: 2px solid #333;
-            border-radius: 12px;
-            padding: 20px;
-            width: 260px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .era.active {
-            border-color: #00d4aa;
-            box-shadow: 0 0 20px rgba(0, 212, 170, 0.3);
-        }
-        
-        .era-header {
-            text-align: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #333;
-        }
-        
-        .era-icon {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .era-name {
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-        
-        .era-year {
-            font-size: 0.75rem;
-            color: #888;
-        }
-        
-        .resource-display {
-            background: #0f0f23;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .resource-icon {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .resource-name {
-            font-size: 0.8rem;
-            color: #888;
-            margin-bottom: 5px;
-        }
-        
-        .resource-amount {
-            font-size: 1.8rem;
-            color: #00d4aa;
-            font-weight: bold;
-        }
-        
-        .resource-price {
-            font-size: 0.75rem;
-            color: #ffd700;
-            margin-top: 5px;
-        }
-        
-        .trade-section {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .trade-btn {
-            background: #00d4aa;
-            border: none;
-            color: #1a1a2e;
-            padding: 10px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: bold;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-        }
-        
-        .trade-btn:hover:not(:disabled) {
-            background: #00f5c4;
-            transform: translateY(-2px);
-        }
-        
-        .trade-btn:disabled {
-            background: #333;
-            color: #666;
-            cursor: not-allowed;
-        }
-        
-        .trade-btn.buy {
-            background: #4ade80;
-        }
-        
-        .trade-btn.sell {
-            background: #f97316;
-        }
-        
-        .travel-btn {
+        /* Opening cutscene */
+        #opening {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            margin-top: 10px;
-            padding: 12px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        
-        .travel-btn:hover:not(:disabled) {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
-        }
-        
-        .travel-btn:disabled {
-            background: #333;
-            cursor: not-allowed;
-        }
-        
-        .cooldown-bar {
-            height: 4px;
-            background: #333;
-            border-radius: 2px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-        
-        .cooldown-fill {
             height: 100%;
-            background: linear-gradient(90deg, #6366f1, #8b5cf6);
-            transition: width 0.1s linear;
-        }
-        
-        .log-section {
-            margin-top: 25px;
-            width: 100%;
-            max-width: 800px;
-        }
-        
-        .log-title {
-            font-size: 0.9rem;
-            color: #888;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 5px;
-        }
-        
-        .log-entries {
-            background: #0f0f23;
-            border-radius: 8px;
-            padding: 15px;
-            max-height: 150px;
-            overflow-y: auto;
-        }
-        
-        .log-entry {
-            font-size: 0.8rem;
-            padding: 5px 0;
-            border-bottom: 1px solid #222;
-            color: #aaa;
-        }
-        
-        .log-entry:last-child {
-            border-bottom: none;
-        }
-        
-        .log-entry .era-tag {
-            color: #00d4aa;
-        }
-        
-        .log-entry .buy-tag {
-            color: #4ade80;
-        }
-        
-        .log-entry .sell-tag {
-            color: #f97316;
-        }
-        
-        .log-entry .travel-tag {
-            color: #8b5cf6;
-        }
-        
-        .instructions {
-            margin-top: 20px;
-            background: #16213e;
-            border-radius: 8px;
-            padding: 15px;
-            max-width: 800px;
-            font-size: 0.8rem;
-            color: #888;
-            line-height: 1.6;
-        }
-        
-        .instructions h3 {
-            color: #00d4aa;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-        
-        .timeline-hint {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 0.8rem;
-            color: #666;
-        }
-
-        .repair-panel {
-            margin-top: 20px;
-            background: linear-gradient(135deg, #1e3a5f, #16213e);
-            border: 2px solid #00d4aa;
-            border-radius: 12px;
-            padding: 20px;
-            max-width: 800px;
-            width: 100%;
-        }
-
-        .repair-title {
-            font-size: 1rem;
-            color: #00d4aa;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .repair-options {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .repair-btn {
-            background: #0f3460;
-            border: 2px solid #e94560;
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 0.85rem;
-            transition: all 0.3s;
+            background: #0a0a0f;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 1s ease;
         }
-
-        .repair-btn:hover:not(:disabled) {
-            background: #e94560;
+        
+        #opening.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .opening-text {
+            max-width: 600px;
+            padding: 40px;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 2s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .opening-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        .opening-text .subtitle {
+            color: #a0a0a0;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .opening-text .dialogue {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid #ffd700;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .opening-text .dialogue .speaker {
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .start-btn {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-family: 'Georgia', serif;
+            color: #1a1a2e;
+            cursor: pointer;
+            border-radius: 30px;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 2s ease 3s forwards;
+        }
+        
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+        
+        /* Main game */
+        #game {
+            display: none;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        #game.active {
+            display: block;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            margin-bottom: 30px;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            margin-bottom: 10px;
+        }
+        
+        header .subtitle {
+            color: #888;
+            font-style: italic;
+        }
+        
+        /* Dr. Morpheus introduction */
+        #morpheus-intro {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(139, 69, 19, 0.1));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        #morpheus-intro.hidden {
+            display: none;
+        }
+        
+        .morpheus-portrait {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #2a2a4e, #1a1a2e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            border: 3px solid rgba(255, 215, 0, 0.5);
+            flex-shrink: 0;
+        }
+        
+        .morpheus-dialogue {
+            flex: 1;
+        }
+        
+        .morpheus-dialogue h2 {
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+        
+        .morpheus-dialogue p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .morpheus-dialogue .hint {
+            color: #888;
+            font-style: italic;
+        }
+        
+        /* Café interior */
+        #cafe {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 30px;
+            min-height: 500px;
+        }
+        
+        /* Customer counter (left) */
+        #customer-counter {
+            background: linear-gradient(180deg, rgba(42, 42, 78, 0.5), rgba(26, 26, 46, 0.8));
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        #customer-counter h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1rem;
+        }
+        
+        .customer {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .customer:hover {
+            border-color: rgba(255, 215, 0, 0.5);
+            transform: translateX(5px);
+        }
+        
+        .customer.waiting {
+            border-color: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+        
+        .customer-avatar {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .customer-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .customer-era {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        .customer-order {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        /* Main counter (center) */
+        #main-counter {
+            background: linear-gradient(180deg, rgba(42, 42, 78, 0.3), rgba(26, 26, 46, 0.9));
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        #counter-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        #counter-header h2 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        
+        #counter-header .welcome {
+            color: #888;
+        }
+        
+        /* Drink preparation area */
+        #prep-area {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            min-height: 200px;
+        }
+        
+        #prep-area h4 {
+            color: #888;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .drink-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .drink-btn {
+            background: linear-gradient(135deg, #2a2a4e, #1a1a2e);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: #e8d5b7;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+        }
+        
+        .drink-btn:hover {
+            border-color: #ffd700;
             transform: translateY(-2px);
         }
-
-        .repair-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        
+        .drink-btn .name {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
         }
-
-        .repair-cost {
+        
+        .drink-btn .price {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        /* Story reveal area */
+        #story-area {
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 150px;
+        }
+        
+        #story-area h4 {
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+        
+        .story-text {
+            line-height: 1.8;
+            font-style: italic;
+            color: #c0c0c0;
+        }
+        
+        .story-text .special {
             color: #ffd700;
             font-weight: bold;
         }
-
-        .repair-effect {
-            color: #4ade80;
-            font-size: 0.75rem;
+        
+        /* Notes (right) */
+        #notes-panel {
+            background: linear-gradient(180deg, rgba(42, 42, 78, 0.5), rgba(26, 26, 46, 0.8));
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
         }
-
-        .stability-warning {
+        
+        #notes-panel h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
             text-align: center;
-            margin-top: 15px;
-            padding: 10px;
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid #ef4444;
-            border-radius: 6px;
-            color: #ef4444;
-            font-size: 0.85rem;
-            animation: pulse 2s infinite;
+            font-size: 1rem;
         }
-
+        
+        .note-entry {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            border-left: 3px solid #ffd700;
+            opacity: 0;
+            transform: translateX(20px);
+            animation: slideIn 0.5s ease forwards;
+        }
+        
+        @keyframes slideIn {
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .note-entry .time {
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        
+        .note-entry .content {
+            color: #e8d5b7;
+            line-height: 1.5;
+        }
+        
+        .note-entry .clue {
+            color: #ffd700;
+        }
+        
+        /* Progress tracking */
+        #progress-bar {
+            margin-top: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        #progress-bar h4 {
+            color: #888;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+            opacity: 0.4;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-step.completed {
+            opacity: 1;
+        }
+        
+        .progress-step.active {
+            opacity: 1;
+        }
+        
+        .step-check {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #888;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .progress-step.completed .step-check {
+            background: #ffd700;
+            border-color: #ffd700;
+            color: #1a1a2e;
+        }
+        
+        .progress-step.active .step-check {
+            border-color: #ffd700;
+            animation: pulse 1s infinite;
+        }
+        
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+        }
+        
+        .step-text {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        
+        .step-desc {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        /* Ending */
+        #ending {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 15, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        #ending.active {
+            display: flex;
+        }
+        
+        #ending h2 {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 30px;
+        }
+        
+        #ending p {
+            max-width: 600px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        #ending .dialogue {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 3px solid #ffd700;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        #ending .dialogue .speaker {
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        #ending .final-thanks {
+            color: #888;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            #cafe {
+                grid-template-columns: 1fr;
+            }
+            
+            #morpheus-intro {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>⏳ Sand of Morpheus</h1>
-    <div class="subtitle">A Time Travel Trading Game</div>
-    
-    <div class="stats-bar">
-        <div class="stat">
-            <div class="stat-value" id="gold">100</div>
-            <div class="stat-label">Gold</div>
+    <!-- Opening Cutscene -->
+    <div id="opening">
+        <div class="opening-text">
+            <h1>☕ Morpheus Matcha</h1>
+            <p class="subtitle">A Time Traveler's Café</p>
+            
+            <p>San Francisco, 2024. Chinatown.</p>
+            
+            <p>A small matcha shop tucked between laundromats and fortune tellers. The sign reads: <span class="special">"Where time travelers gather"</span></p>
+            
+            <div class="dialogue">
+                <p class="speaker">Dr. Felix Morpheus</p>
+                <p>"I invented it six years ago. A way to stabilize temporal rifts. But something went wrong. My daughter... she got pulled in. She's scattered across time now."</p>
+            </div>
+            
+            <p>He stares at a photograph in his hands. A little girl laughing in a garden.</p>
+            
+            <div class="dialogue">
+                <p class="speaker">Dr. Felix Morpheus</p>
+                <p>"Every customer who walks through that door has traveled through time. Their stories... their secrets... they hold the key to bringing her back. But I can't do it alone."</p>
+            </div>
+            
+            <p>He looks up. His eyes meet yours.</p>
+            
+            <div class="dialogue">
+                <p class="speaker">Dr. Felix Morpheus</p>
+                <p>"You're new here, aren't you? I can feel it. <span class="special">A fragmented soul.</span> Like me. Like everyone who finds their way to Morpheus Matcha."</p>
+            </div>
+            
+            <p>He sets down the photograph. His hands tremble slightly.</p>
+            
+            <div class="dialogue">
+                <p class="speaker">Dr. Felix Morpheus</p>
+                <p>"Stay. Help me serve the customers. Listen to their stories. Maybe together... we can piece together enough fragments to save my daughter. To save us both."</p>
+            </div>
+            
+            <button class="start-btn" onclick="startGame()">I'll stay.</button>
         </div>
-        <div class="stat">
-            <div class="stat-value" id="trades">0</div>
-            <div class="stat-label">Trades</div>
-        </div>
-        <div class="stat">
-            <div class="stat-value" id="stability">100</div>
-            <div class="stat-label">Timeline Stability</div>
-        </div>
-    </div>
-    
-    <div id="stability-bar" style="width: 100%; max-width: 800px; height: 8px; background: #333; border-radius: 4px; margin-bottom: 20px; overflow: hidden;">
-        <div id="stability-fill" style="height: 100%; width: 100%; background: linear-gradient(90deg, #4ade80, #fbbf24, #ef4444); transition: width 0.3s;"></div>
-    </div>
-    
-    <div class="eras-container" id="eras">
-        <!-- Eras will be rendered here -->
-    </div>
-    
-    <div class="timeline-hint">
-        💡 Trade low in one era, travel to another, sell high!
     </div>
 
-    <div class="repair-panel" id="repair-panel" style="display: none;">
-        <div class="repair-title">🔧 Timeline Repair Station</div>
-        <div class="repair-options" id="repair-options">
-            <button class="repair-btn" onclick="repairTimeline(10, 20)" id="repair-small">
-                <span>Quick Fix</span>
-                <span class="repair-cost">💰 20g</span>
-                <span class="repair-effect">+10% Stability</span>
-            </button>
-            <button class="repair-btn" onclick="repairTimeline(25, 50)" id="repair-medium">
-                <span>Era Lock</span>
-                <span class="repair-cost">💰 50g</span>
-                <span class="repair-effect">+25% Stability</span>
-            </button>
-            <button class="repair-btn" onclick="repairTimeline(50, 100)" id="repair-large">
-                <span>Timeline Reset</span>
-                <span class="repair-cost">💰 100g</span>
-                <span class="repair-effect">+50% Stability</span>
-            </button>
+    <!-- Main Game -->
+    <div id="game">
+        <header>
+            <h1>☕ Morpheus Matcha</h1>
+            <p class="subtitle">A Time Traveler's Café — San Francisco, Chinatown</p>
+        </header>
+        
+        <!-- Dr. Morpheus Introduction -->
+        <div id="morpheus-intro">
+            <div class="morpheus-portrait">👨‍🔬</div>
+            <div class="morpheus-dialogue">
+                <h2>Dr. Felix Morpheus</h2>
+                <p>"Welcome to Morpheus Matcha. I founded this place six years ago after... the accident. My daughter, she was in the wrong place at the wrong time. Now she's scattered across every era I tried to study."</p>
+                <p>"Each customer who walks through that door has a story. They come from different times — some by choice, some by accident. <span class="special">Listen to them.</span> Their memories, their secrets... they're like puzzle pieces."</p>
+                <p class="hint">👆 Click on customers to hear their orders and stories</p>
+            </div>
         </div>
-        <div class="stability-warning" id="stability-warning" style="display: none;">
-            ⚠️ Timeline Critical! Prices extremely volatile. Repair now!
-        </div>
-        <div class="stability-warning" id="paradox-warning" style="display: none; background: rgba(139, 92, 246, 0.3); border-color: #8b5cf6; color: #a78bfa;">
-            💥 PARADOX IMMINENT! 0% Stability = Resource Swap + Price Inversion!
+        
+        <div id="cafe">
+            <!-- Left: Customer Counter -->
+            <div id="customer-counter">
+                <h3>📋 Today's Customers</h3>
+                <div id="customers-list">
+                    <!-- Customers will appear here -->
+                </div>
+            </div>
+            
+            <!-- Center: Main Counter -->
+            <div id="main-counter">
+                <div id="counter-header">
+                    <h2>☕ The Counter</h2>
+                    <p class="welcome">What would you like to serve?</p>
+                </div>
+                
+                <div id="prep-area">
+                    <h4>🍵 Prepare a Drink</h4>
+                    <div class="drink-options" id="drink-options">
+                        <button class="drink-btn" onclick="prepareDrink('matcha')">
+                            <span class="name">Traditional Matcha</span>
+                            <span class="price">$4.00</span>
+                        </button>
+                        <button class="drink-btn" onclick="prepareDrink('hojicha')">
+                            <span class="name">Hojicha Latte</span>
+                            <span class="price">$5.00</span>
+                        </button>
+                        <button class="drink-btn" onclick="prepareDrink('oolong')">
+                            <span class="name">Golden Oolong</span>
+                            <span class="price">$4.50</span>
+                        </button>
+                        <button class="drink-btn" onclick="prepareDrink('puer')">
+                            <span class="name">Aged Pu-erh</span>
+                            <span class="price">$6.00</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="story-area">
+                    <h4>📖 Their Story</h4>
+                    <div id="story-text" class="story-text">
+                        Select a customer to hear their story...
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right: Notes -->
+            <div id="notes-panel">
+                <h3>📓 Notes & Clues</h3>
+                <div id="notes-list">
+                    <!-- Notes will appear here -->
+                </div>
+                
+                <div id="progress-bar">
+                    <h4>🔮 Saving Lily — Progress</h4>
+                    <div class="progress-step" data-step="1">
+                        <div class="step-check">○</div>
+                        <div class="step-text">
+                            <div class="step-title">Listen to Eleanor</div>
+                            <div class="step-desc">The regular from 2087</div>
+                        </div>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <div class="step-check">○</div>
+                        <div class="step-text">
+                            <div class="step-title">Hear REV-9's Secret</div>
+                            <div class="step-desc">The android from 2145</div>
+                        </div>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <div class="step-check">○</div>
+                        <div class="step-text">
+                            <div class="step-title">Discover Marcus's Gift</div>
+                            <div class="step-desc">The jazz musician from 1958</div>
+                        </div>
+                    </div>
+                    <div class="progress-step" data-step="4">
+                        <div class="step-check">○</div>
+                        <div class="step-text">
+                            <div class="step-title">Uncover the Truth</div>
+                            <div class="step-desc">Dr. Morpheus's final confession</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
-    <div class="log-section">
-        <div class="log-title">📜 Timeline Log</div>
-        <div class="log-entries" id="log">
-            <div class="log-entry">Game started. Choose an era and start trading!</div>
+    <!-- Ending -->
+    <div id="ending">
+        <h2>🌟 The Truth Revealed</h2>
+        
+        <p>The café is empty now. Dr. Morpheus sits across from you, the photograph between you on the table.</p>
+        
+        <div class="dialogue">
+            <p class="speaker">Dr. Felix Morpheus</p>
+            <p>"I lied to you. About everything."</p>
+            <p>He takes a breath. His hands aren't trembling anymore.</p>
+            <p>"Lily wasn't my daughter. She was <span class="special">me</span>. I traveled back to save her — to save myself — and I fractured my own timeline. Every customer, every story... they were <span class="special">me</span>. Different versions of me from different times."</p>
+            <p>"You helped me remember. All those fragments scattered across time... they were pieces of my consciousness. And now—"</p>
         </div>
+        
+        <p>He stands. The photograph glows with a soft golden light.</p>
+        
+        <div class="dialogue">
+            <p class="speaker">Dr. Felix Morpheus</p>
+            <p>"—now I'm whole again. Thank you. For listening. For staying."</p>
+            <p>He smiles. It's the first real smile you've seen from him.</p>
+            <p>"The café is yours now. <span class="special">Morpheus Matcha.</span> Where time travelers gather. Where lost souls find their way home."</p>
+        </div>
+        
+        <p class="final-thanks">— The End —<br>Thank you for playing Morpheus Matcha</p>
     </div>
-    
-    <div class="instructions">
-        <h3>🎮 How to Play</h3>
-        <p>• <strong>Buy</strong> resources when cheap in one era</p>
-        <p>• <strong>Travel</strong> to another era (cooldown: 3 seconds)</p>
-        <p>• <strong>Sell</strong> resources for profit</p>
-        <p>• <strong>Build wealth</strong> across time!</p>
-        <p>• <strong>Watch out</strong> — prices fluctuate randomly!</p>
-        <p>• <strong>⚠️ Timeline Stability:</strong> Each travel destabilizes the timeline. Low stability = chaotic prices!</p>
-        <p>• <strong>💥 Paradox Events:</strong> At 0% stability, resources SWAP between eras and prices INVERT!</p>
-    </div>
-    
+
     <script>
         // Game State
         const game = {
-            gold: 100,
-            trades: 0,
-            stability: 100,
-            currentEra: 0,
-            cooldown: 0,
-            eras: [
-                {
-                    id: 'jurassic',
-                    name: 'Jurassic',
-                    year: '150M BC',
-                    icon: '🦕',
-                    resource: 'Fossils',
-                    resourceIcon: '🦴',
-                    amount: 0,
-                    basePrice: 5,
-                    price: 5
-                },
-                {
-                    id: 'rome',
-                    name: 'Ancient Rome',
-                    year: '50 AD',
-                    icon: '🏛️',
-                    resource: 'Art',
-                    resourceIcon: '🏺',
-                    amount: 0,
-                    basePrice: 20,
-                    price: 20
-                },
-                {
-                    id: 'modern',
-                    name: '2020s',
-                    year: '2024 AD',
-                    icon: '🏙️',
-                    resource: 'Tech',
-                    resourceIcon: '💻',
-                    amount: 0,
-                    basePrice: 50,
-                    price: 50
-                },
-                {
-                    id: 'future',
-                    name: '2100+',
-                    year: '2150 AD',
-                    icon: '🚀',
-                    resource: 'Energy',
-                    resourceIcon: '⚡',
-                    amount: 0,
-                    basePrice: 100,
-                    price: 100
-                }
-            ],
-            log: []
+            currentCustomer: null,
+            customersServed: 0,
+            cluesFound: 0,
+            notes: [],
+            stepsCompleted: [false, false, false, false]
         };
         
-        // Render the game
-        function render() {
-            const erasContainer = document.getElementById('eras');
-            erasContainer.innerHTML = '';
+        // Customer Data
+        const customers = [
+            {
+                id: 'eleanor',
+                name: 'Eleanor Chen',
+                avatar: '👩‍🔬',
+                era: '2087',
+                eraDesc: 'Neo-Shanghai',
+                order: 'Hojicha Latte',
+                orderText: '"The roasted flavor... it reminds me of my grandmother\'s kitchen."',
+                story: `"I was a quantum physicist in Neo-Shanghai. Working on temporal navigation. We succeeded, but one test subject... went wrong. He didn't just travel through time. He fragmented. Existed in multiple eras simultaneously.`, 
+                clue: `"He kept journals. Left them at cafes across time. Said he was 'looking for the one who could put him back together.' I think... I think he might have founded this place."`,
+                hint: 'Talk to me after you\'ve served the others. I have something to tell you.',
+                served: false
+            },
+            {
+                id: 'rev9',
+                name: 'REV-9',
+                avatar: '🤖',
+                era: '2145',
+                eraDesc: 'Los Angeles',
+                order: 'Traditional Matcha',
+                orderText: '"The bitterness is... acceptable. Reminds me of my first mission."',
+                story: `"I was designed for infiltration. 2145. The year humanity finally cracked true AI consciousness. They made us too real. Started giving us memories. Feelings.`, 
+                clue: `"My creator... she was obsessed with time travel. Said she had to save someone. A daughter, she claimed. But her name... it was Morpheus. Dr. Felix Morpheus. She never said 'daughter' again after the incident."`,
+                hint: 'Serve the others first. Then I will tell you about my creator.',
+                served: false
+            },
+            {
+                id: 'marcus',
+                name: 'Marcus Webb',
+                avatar: '🎷',
+                era: '1958',
+                eraDesc: 'New Orleans',
+                order: 'Golden Oolong',
+                orderText: '"Smooth. Real smooth. You know, I once played with Coltrane? He said I\'d go far. He didn\'t mean this far."',
+                story: `"Jazz. That was my life. 1958. The golden age. Then this... machine appeared outside my apartment. Flash of light. Woke up in a lab with strangers asking questions about 'temporal displacement.'`, 
+                clue: `"The scientist. She was young, desperate. Kept talking about her 'Felix.' Said she had to save him from himself. I gave her my saxophone case. It had my lucky handkerchief inside. Maybe she still has it."`,
+                hint: 'Play it cool, kid. When everyone\'s had their say, I\'ll tell you what I know.',
+                served: false
+            }
+        ];
+        
+        // Serve customer
+        function serveCustomer(customerId) {
+            const customer = customers.find(c => c.id === customerId);
+            if (!customer || customer.served) return;
             
-            game.eras.forEach((era, index) => {
-                const isActive = index === game.currentEra;
-                const canBuy = game.gold >= era.price;
-                const canSell = era.amount > 0;
-                const canTravel = game.cooldown <= 0 && index !== game.currentEra;
-                
-                const eraDiv = document.createElement('div');
-                eraDiv.className = `era ${isActive ? 'active' : ''}`;
-                eraDiv.innerHTML = `
-                    <div class="era-header">
-                        <span class="era-icon">${era.icon}</span>
-                        <div class="era-name">${era.name}</div>
-                        <div class="era-year">${era.year}</div>
-                    </div>
-                    <div class="resource-display">
-                        <span class="resource-icon">${era.resourceIcon}</span>
-                        <div class="resource-name">${era.resource}</div>
-                        <div class="resource-amount">${era.amount}</div>
-                        <div class="resource-price">💰 ${era.price} gold</div>
-                    </div>
-                    <div class="trade-section">
-                        <button class="trade-btn buy" onclick="buy(${index})" ${!canBuy ? 'disabled' : ''}>
-                            Buy 1 (${era.price}g)
-                        </button>
-                        <button class="trade-btn sell" onclick="sell(${index})" ${!canSell ? 'disabled' : ''}>
-                            Sell 1 (${era.price}g)
-                        </button>
-                        <button class="travel-btn" onclick="travel(${index})" ${!canTravel ? 'disabled' : ''}>
-                            ${!canTravel && game.cooldown > 0 ? `Cooldown: ${game.cooldown}s` : '⏰ Travel Here'}
-                        </button>
-                        ${game.cooldown > 0 && isActive ? `
-                            <div class="cooldown-bar">
-                                <div class="cooldown-fill" style="width: ${(game.cooldown / 30) * 100}%"></div>
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-                erasContainer.appendChild(eraDiv);
-            });
+            game.currentCustomer = customer;
+            customer.served = true;
             
-            // Update stats
-            document.getElementById('gold').textContent = game.gold;
-            document.getElementById('trades').textContent = game.trades;
-            document.getElementById('stability').textContent = game.stability + '%';
-            
-            // Update stability bar
-            const stabilityFill = document.getElementById('stability-fill');
-            stabilityFill.style.width = game.stability + '%';
-            
-            // Color based on stability
-            if (game.stability > 60) {
-                stabilityFill.style.background = '#4ade80';
-            } else if (game.stability > 30) {
-                stabilityFill.style.background = '#fbbf24';
-            } else {
-                stabilityFill.style.background = '#ef4444';
-            }
-            
-            // Update log
-            const logDiv = document.getElementById('log');
-            logDiv.innerHTML = game.log.slice(-20).map(entry => `
-                <div class="log-entry">${entry}</div>
-            `).join('');
-
-            // Update repair panel
-            updateRepairPanel();
-        }
-        
-        // Buy resource
-        function buy(eraIndex) {
-            const era = game.eras[eraIndex];
-            if (game.gold >= era.price) {
-                game.gold -= era.price;
-                era.amount++;
-                game.trades++;
-                addLog(`<span class="era-tag">${era.icon} ${era.name}</span>: Bought 1 <span class="buy-tag">${era.resourceIcon}</span> for ${era.price}g`);
-                render();
-            }
-        }
-        
-        // Sell resource
-        function sell(eraIndex) {
-            const era = game.eras[eraIndex];
-            if (era.amount > 0) {
-                game.gold += era.price;
-                era.amount--;
-                game.trades++;
-                addLog(`<span class="era-tag">${era.icon} ${era.name}</span>: Sold 1 <span class="sell-tag">${era.resourceIcon}</span> for ${era.price}g`);
-                render();
-            }
-        }
-        
-        // Travel to era
-        function travel(eraIndex) {
-            if (game.cooldown <= 0 && eraIndex !== game.currentEra) {
-                const oldEra = game.eras[game.currentEra];
-                const newEra = game.eras[eraIndex];
-                
-                game.currentEra = eraIndex;
-                game.cooldown = 3; // 3 second cooldown
-                addLog(`<span class="travel-tag">⏰</span> Traveled from ${oldEra.icon} to ${newEra.icon} ${newEra.name}`);
-                
-                // Traveling destabilizes the timeline!
-                game.stability = Math.max(0, game.stability - 5);
-                if (game.stability < 30) {
-                    addLog(`⚠️ <span class="sell-tag">Timeline unstable!</span> Prices becoming chaotic...`);
-                }
-                
-                // Fluctuate prices on travel (more volatile when unstable)
-                fluctuatePrices();
-                
-                render();
-                startCooldown();
-            }
-        }
-        
-        // Start cooldown timer
-        function startCooldown() {
-            if (game.cooldown > 0) {
-                game.cooldown--;
-                render();
-                setTimeout(startCooldown, 1000);
-            }
-        }
-        
-        // Randomly fluctuate prices (affected by timeline stability)
-        function fluctuatePrices() {
-            const volatility = Math.max(5, 20 - (game.stability / 5)); // More unstable = more volatile
-            const instabilityBonus = game.stability < 50 ? Math.floor(Math.random() * 15) : 0;
-            
-            game.eras.forEach(era => {
-                const fluctuation = Math.floor(Math.random() * volatility * 2) - volatility;
-                const newPrice = Math.max(1, era.basePrice + fluctuation + instabilityBonus);
-                if (newPrice !== era.price) {
-                    const direction = newPrice > era.price ? '📈' : '📉';
-                    era.price = newPrice;
-                    addLog(`${direction} ${era.icon} ${era.name}: ${era.resource} now costs ${era.price}g`);
-                }
-            });
-        }
-        
-        // Add log entry
-        function addLog(message) {
-            const timestamp = new Date().toLocaleTimeString();
-            game.log.push(`[${timestamp}] ${message}`);
-        }
-        
-        // Initialize game
-        render();
-        addLog('🗺️ Welcome to Sand of Morpheus!');
-        addLog('💡 Buy low, travel, sell high!');
-
-        // Update repair panel visibility
-        function updateRepairPanel() {
-            const panel = document.getElementById('repair-panel');
-            const warning = document.getElementById('stability-warning');
-            const paradoxWarning = document.getElementById('paradox-warning');
-            const smallBtn = document.getElementById('repair-small');
-            const mediumBtn = document.getElementById('repair-medium');
-            const largeBtn = document.getElementById('repair-large');
-
-            // Show panel if stability < 100%
-            panel.style.display = game.stability < 100 ? 'block' : 'none';
-
-            // Show warning if critical
-            warning.style.display = game.stability < 30 && game.stability > 0 ? 'block' : 'none';
-
-            // Show paradox warning if stability = 0
-            if (paradoxWarning) {
-                paradoxWarning.style.display = game.stability <= 0 ? 'block' : 'none';
-            }
-
-            // Disable buttons if not enough gold
-            smallBtn.disabled = game.gold < 20;
-            mediumBtn.disabled = game.gold < 50;
-            largeBtn.disabled = game.gold < 100;
-        }
-
-        // Repair timeline stability
-        function repairTimeline(amount, cost) {
-            if (game.gold >= cost && game.stability < 100) {
-                game.gold -= cost;
-                game.stability = Math.min(100, game.stability + amount);
-                addLog(`🔧 <span class="buy-tag">Timeline Repaired!</span> +${amount}% stability restored for ${cost}g`);
-
-                // Reduce price volatility after repair
-                if (game.stability >= 70) {
-                    game.eras.forEach(era => {
-                        era.price = era.basePrice;
-                    });
-                    addLog(`✨ Timeline stabilized. Prices normalizing...`);
-                }
-
-                // Reset paradox flag if stability restored above threshold
-                if (game.stability > 20) {
-                    game.paradoxTriggered = false;
-                }
-
-                render();
-            }
-        }
-
-        // PARADOX EVENT: Triggered when stability hits 0%
-        function triggerParadoxEvent() {
-            addLog(`💥 <span class="sell-tag">PARADOX EVENT!</span> Timeline shattered!`);
-
-            // Randomly swap resources between eras
-            const shuffledEras = [...game.eras].sort(() => Math.random() - 0.5);
-            shuffledEras.forEach((era, index) => {
-                const targetEra = game.eras[index];
-                const tempAmount = era.amount;
-                era.amount = targetEra.amount;
-                targetEra.amount = tempAmount;
-                addLog(`🔄 ${era.icon} ${era.name}: Resources swapped with ${targetEra.icon} ${targetEra.name}!`);
-            });
-
-            // Invert prices
-            game.eras.forEach(era => {
-                const oldPrice = era.price;
-                // Calculate inverted price (inverse ratio to base price)
-                const inversionFactor = 150 / era.basePrice; // Higher base = lower inverted
-                era.price = Math.max(1, Math.floor(oldPrice * inversionFactor));
-                addLog(`📊 ${era.icon} ${era.name}: Prices INVERTED! Now ${era.price}g (was ${oldPrice}g)`);
-            });
-
-            // Bonus: Everyone gets a small amount of gold (temporal compensation)
-            const goldBonus = 25;
-            game.gold += goldBonus;
-            addLog(`💰 <span class="buy-tag">Temporally Compensated!</span> +${goldBonus}g for paradox survival`);
-
-            addLog(`⚠️ Paradox event complete. Timeline highly unstable!`);
-        }
-
-        // Check for paradox conditions
-        function checkParadoxConditions() {
-            if (game.stability <= 0 && !game.paradoxTriggered) {
-                game.paradoxTriggered = true;
-                triggerParadoxEvent();
-                // Paradox costs stability - can't go below 0
-                game.stability = 0;
-            }
-        }
-
-        // Modify travel to check for paradox
-        const originalTravel = travel;
-        function travel(eraIndex) {
-            if (game.cooldown <= 0 && eraIndex !== game.currentEra) {
-                const oldEra = game.eras[game.currentEra];
-                const newEra = game.eras[eraIndex];
-
-                game.currentEra = eraIndex;
-                game.cooldown = 3;
-                addLog(`<span class="travel-tag">⏰</span> Traveled from ${oldEra.icon} to ${newEra.icon} ${newEra.name}`);
-
-                game.stability = Math.max(0, game.stability - 5);
-
-                if (game.stability < 30) {
-                    addLog(`⚠️ <span class="sell-tag">Timeline unstable!</span> Prices becoming chaotic...`);
-                }
-
-                checkParadoxConditions();
-                fluctuatePrices();
-
-                render();
-                startCooldown();
-            }
-        }
-
-        // Paradox tracker (add to game state)
-        game.paradoxTriggered = false;
-
-        // Paradox Survivor Ability System
-        game.paradoxSurvivorCount = 0;
-        game.hasSurvivorAbility = false;
-
-        // Add survivor ability UI
-        function addSurvivorAbilityUI() {
-            const panel = document.getElementById('repair-panel');
-            const abilitySection = document.createElement('div');
-            abilitySection.id = 'survivor-ability';
-            abilitySection.className = 'repair-title';
-            abilitySection.style.marginTop = '15px';
-            abilitySection.style.borderTop = '1px solid #333';
-            abilitySection.style.paddingTop = '15px';
-            abilitySection.innerHTML = `
-                <div style="color: #a78bfa; font-size: 0.9rem; margin-bottom: 10px;">
-                    💫 Paradox Survivor Ability
-                </div>
-                <button class="repair-btn" onclick="activateSurvivorAbility()" id="survivor-btn" ${!game.hasSurvivorAbility ? 'disabled style="opacity: 0.5;"' : ''}>
-                    <span>⏪ Temporal Recall</span>
-                    <span style="color: #4ade80; font-size: 0.75rem;">1 FREE Travel</span>
-                </button>
-                <div style="color: #888; font-size: 0.7rem; margin-top: 8px;">
-                    Survived ${game.paradoxSurvivorCount} paradox${game.paradoxSurvivorCount !== 1 ? 'es' : ''}
-                </div>
+            // Update UI
+            document.getElementById('story-text').innerHTML = `
+                <p class="special">"${customer.order}"</p>
+                <p>${customer.story}</p>
+                <p class="hint"><br>💡 ${customer.hint}</p>
             `;
-            panel.querySelector('.repair-options').appendChild(abilitySection);
+            
+            // Add note
+            addNote(customer.era, customer.clue);
+            
+            // Update customer list
+            renderCustomers();
         }
-
-        // Activate survivor ability (free travel)
-        function activateSurvivorAbility() {
-            if (game.hasSurvivorAbility) {
-                game.hasSurvivorAbility = false;
-                game.cooldown = 0; // Remove travel cooldown
-                addLog(`💫 <span class="buy-tag">Temporal Recall!</span> Free travel activated!`);
-                render();
+        
+        // Prepare drink
+        function prepareDrink(drink) {
+            if (!game.currentCustomer) {
+                document.getElementById('story-text').innerHTML = `
+                    <p style="color: #888;">Select a customer first to hear their story...</p>
+                `;
+                return;
+            }
+            
+            const drinkNames = {
+                'matcha': 'Traditional Matcha',
+                'hojicha': 'Hojicha Latte',
+                'oolong': 'Golden Oolong',
+                'puer': 'Aged Pu-erh'
+            };
+            
+            document.getElementById('story-text').innerHTML = `
+                <p class="special">☕ Preparing ${drinkNames[drink]}...</p>
+                <p>${game.currentCustomer.name} takes the drink with a grateful nod.</p>
+                <p>"Thank you. Here... this is for you."</p>
+            `;
+            
+            game.customersServed++;
+            checkProgress();
+        }
+        
+        // Add note
+        function addNote(era, clue) {
+            const note = {
+                era: era,
+                clue: clue,
+                time: new Date().toLocaleTimeString()
+            };
+            
+            game.notes.push(note);
+            game.cluesFound++;
+            
+            const notesList = document.getElementById('notes-list');
+            const noteEl = document.createElement('div');
+            noteEl.className = 'note-entry';
+            noteEl.innerHTML = `
+                <div class="time">${era} • ${note.time}</div>
+                <div class="content">${clue}</div>
+            `;
+            notesList.insertBefore(noteEl, notesList.firstChild);
+        }
+        
+        // Check progress
+        function checkProgress() {
+            // Mark steps as completed based on clues
+            const stepMapping = {
+                'eleanor': 0,
+                'rev9': 1,
+                'marcus': 2
+            };
+            
+            if (game.currentCustomer && stepMapping[game.currentCustomer.id] !== undefined) {
+                const stepIdx = stepMapping[game.currentCustomer.id];
+                game.stepsCompleted[stepIdx] = true;
+            }
+            
+            // Update UI
+            document.querySelectorAll('.progress-step').forEach((step, idx) => {
+                step.classList.remove('active', 'completed');
+                if (game.stepsCompleted[idx]) {
+                    step.classList.add('completed');
+                    step.querySelector('.step-check').textContent = '✓';
+                } else if (game.customersServed === idx) {
+                    step.classList.add('active');
+                }
+            });
+            
+            // Check for ending
+            if (game.customersServed >= 3 && game.cluesFound >= 3) {
+                setTimeout(triggerEnding, 2000);
             }
         }
-
-        // Grant survivor ability after paradox
-        function grantSurvivorAbility() {
-            game.paradoxSurvivorCount++;
-            game.hasSurvivorAbility = true;
-            addLog(`🏆 <span class="era-tag">PARADOX SURVIVOR!</span> Earned "Temporal Recall" ability (1 free travel)!`);
-            render();
+        
+        // Render customers
+        function renderCustomers() {
+            const list = document.getElementById('customers-list');
+            list.innerHTML = '';
+            
+            customers.forEach(customer => {
+                const div = document.createElement('div');
+                div.className = `customer ${customer.served ? '' : 'waiting'}`;
+                div.onclick = () => serveCustomer(customer.id);
+                div.innerHTML = `
+                    <div class="customer-avatar">${customer.avatar}</div>
+                    <div class="customer-name">${customer.name}</div>
+                    <div class="customer-era">${customer.era} — ${customer.eraDesc}</div>
+                    <div class="customer-order">${customer.served ? '✓ Served' : customer.order}</div>
+                `;
+                list.appendChild(div);
+            });
         }
-
-        // Modify paradox event to grant ability
-        const originalParadox = triggerParadoxEvent;
-        function triggerParadoxEvent() {
-            originalParadox();
-            grantSurvivorAbility();
+        
+        // Start game
+        function startGame() {
+            document.getElementById('opening').classList.add('hidden');
+            document.getElementById('game').classList.add('active');
+            renderCustomers();
         }
-
-        // Initialize survivor ability UI after load
-        setTimeout(addSurvivorAbilityUI, 100);
+        
+        // Trigger ending
+        function triggerEnding() {
+            document.getElementById('ending').classList.add('active');
+        }
+        
+        // Initialize first note
+        addNote('2024', '"Welcome to Morpheus Matcha. Listen to their stories. Find the truth."');
     </script>
 </body>
 </html>
