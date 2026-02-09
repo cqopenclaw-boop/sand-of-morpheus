@@ -78,3 +78,6 @@ Each day gets a new file: `2026-02-03.md`, `2026-02-04.md`, etc.
 ---
 
 *Last updated: 2026-02-03*
+## Status
+- [x] Game design complete
+- [ ] Phase 1: Core framework
