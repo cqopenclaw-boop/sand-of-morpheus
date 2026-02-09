@@ -1,363 +1,392 @@
-# Sand of Morpheus - Game Design Document
+# Evergreen & Time — Game Design Document
 
-**Version:** 2.0
-**Date:** 2026-02-05
-**Status:** Redesigning Narrative
-**Tone Reference:** Delicious Dungeon × Pride and Prejudice × Gintama × The Prestige
+**A vintage shop where time itself is merchandise. You don't remember what you did. The customers remember pieces of it.**
 
 ---
 
-## The Pitch
+## Core Concept
 
-**"Welcome to Morpheus Matcha. We serve tea. We serve secrets."**
+**Setting:** Evergreen & Time — a dusty vintage shop downtown. Sign reads: "We buy yesterday. sell tomorrow."
 
-A quiet matcha shop in San Francisco Chinatown where time travelers gather. You play as the new assistant, learning the rituals, serving the regulars, and slowly realizing: the shop isn't just in Chinatown—Chinatown isn't just in San Francisco.
+**Premise:** You inherited the shop from your grandmother. You woke up 3 months ago with no memory of an accident. Your sister is gone. The customers who visit? They carry relics. Their stories hit you like lightning. Each one unlocks a fragment of what you did.
 
----
-
-## The Setting
-
-**San Francisco Chinatown**
-- Narrow alleys, red lanterns, incense drifting
-- Old hand-painted signs alongside modern tech offices
-- Grandmothers who know things
-- Tourists who are very, very lost
-
-**Morpheus Matcha**
-- Tucked on a side street (Portsmouth Square side, near the dragon mural)
-- Traditional Japanese tea ceremony in a Chinese neighborhood
-- Upstairs apartment where time doesn't follow rules
-- Back door opens to different eras
-- Three tables. Two chairs at the counter. One missing
-
-**The Vibe:**
-- Mindfulness meets chaos
-- Ancient tradition meets temporal absurdity
-- The ritual of whisk, sip, reflect
-- Rain on the windows. Steam rising. Secrets spilling.
+**Theme:** You can't fix the past. You can only choose what ripples forward.
 
 ---
 
-## The Vibe
+## Core Mechanics
 
-**Surface:** Wholesome, witty, slice-of-life tea shop management
-**Underneath:** Profound questions about time, identity, and the people we become
+### 1. The Shop Loop
 
-**Tone Balance:**
-- 70% Cozy comedy (whisking tea, dealing with weird customers)
-- 20% Witty social encounters (Pride and Prejudice-style banter)
-- 10% Emotional gut-punch (Gintama knows when to be serious)
+```
+Open Shop → Customer Arrives → Hear Story → Buy/Sell Relics
+                                        ↓
+                          Travel with ONE Relic → Give to Someone
+                                        ↓
+                          Butterfly Effect Triggers
+                                        ↓
+                          NPC Changes/Different/Gone
+                                        ↓
+                          Shop Survives → Next Day
+```
 
----
+### 2. Resource: Shop Money
 
-## The Setting: Morpheus Matcha
+- **Purpose:** Keep shop running, pay rent, buy relics
+- **Constraint:** Can't help everyone if shop closes
+- **Tension:** Buy relics = money gone = less help later
 
-**What it is:**
-A quiet matcha shop in San Francisco Chinatown where time travelers gather. The same physical space, different time periods.
+### 3. Resource: Memory Fragments
 
-**How it works:**
-- Customers from any era can visit
-- The menu adapts to what's available in each era (matcha, always matcha—ceremony doesn't change)
-- Time travelers use it as a neutral meeting ground
-- The staff are... complicated
+- **Purpose:** Unlock your own backstory
+- **Trigger:** Specific NPC dialogue hits emotional beats
+- **Collection:** Passive (not quest-gated)
+- **Use:** Story progression only
 
-**The Catch:**
-The shop exists because of a temporal accident 70 years ago. Nobody remembers how it started. The owner is trying to figure it out before the timeline collapses.
+### 4. Time Travel: ONE Relic
 
----
+- **Constraint:** Can only carry ONE relic per trip
+- **Rule:** Must give relic to someone (can't just take)
+- **Consequence:** Giving relic to Person A changes Person B's timeline
+- **Permanence:** Changes are permanent
 
-## The Characters
+### 5. NPC Permanence System
 
-### You (The Player)
-- New assistant at Morpheus Matcha
-- You don't remember applying. You don't remember your past.
-- The other characters keep recognizing you. You don't know them.
-- **Mystery:** Who are you, really?
-
-### Dr. Felix Morpheus (The Owner)
-**Vibe:** Retired time-traveler with too many secrets, serves the best matcha in seven decades
-
-**Surface:** Elegant older man, moves like he knows martial arts (he does), speaks Cantonese better than Japanese, somehow always knows what you need before you order
-
-**Underneath:** Former temporal agent. Saw things. Did things. Now hiding. The shop is a penance. He lost someone. He doesn't talk about it.
-
-**Quotable:** 
-> "Matcha teaches us: the moment is everything. The whisk, the water, the wrist. Nothing else matters."
-> 
-> "...You're still here. Good. I have something to show you. Upstairs. The door that shouldn't exist."
-
-**Arc:** Teaching you about the shop while hiding why he really started it
-
-### Eleanor "Ellie" Chen (The Regular)
-**Vibe:** 1920s detective who got stuck in the future
-
-**Surface:** Hard-boiled noir personality, drinks her matcha bitter, solves cold cases nobody asked her to solve, sits in the corner booth with her notebook
-
-**Underneath:** She's not stuck. She chose to stay. She has someone she's waiting for. Someone who walked out the back door and never came back.
-
-**Quotable:**
-> "In my day, we solved crimes with deduction. Now kids have 'databases.' Give me a hunch and a cup of bitter tea any day."
-> 
-> "...That gentleman at the door. He's been there since 1952. He doesn't know he's a ghost."
-
-**Arc:** Teaches you detective skills, her waiting mystery unfolds
-
-### REV-9 (The Robot)
-**Vibe:** Ancient robot trying to understand human emotions
-
-**Surface:** Comically bad at social cues, adorable, constantly misunderstanding idioms, named after a movie reference it doesn't get, fascinated by the ritual of tea preparation
-
-**Underneath:** Older than it lets on. It was someone's companion. That person is gone. It comes to the shop because the memory of quiet moments makes it feel something.
-
-**Quotable:**
-> "I do not require sustenance. But I find... watching you whisk... satisfying. Is this what humans call 'presence'?"
-> 
-> "A human told me once: 'I could die for a cup of tea like this.' I did not know they meant literally. I still do not know how to process this."
-
-**Arc:** Learning emotions through tea preparation
-
-### Marcus Webb (The Time Tourist)
-**Vibe:** Enthusiastic historian from 2150 who treats every era like a theme park
-
-**Surface:** Overly excited, takes too many photos, asks annoying questions, means well
-
-**Underneath:** His entire era is artificial. He's never experienced "real" history. He's jealous of people who lived through real events.
-
-**Quotable:**
-> "Oh my god. A 2020s coffee shop. This is SO authentic. The microplastics in the cups, the caffeine dependency, the existential dread—it's PERFECT."
-> 
-> "...Why is everyone looking at me? Did I say something wrong? Was that offensive to your generation?"
-
-**Arc:** Learns that history isn't a theme park
+| Status | Meaning |
+|--------|---------|
+| **Active** | Normal NPC, can be helped |
+| **Changed** | Butterfly effect applied, different dialogue |
+| **Gone** | Timeline fixed, never existed in new timeline |
+| **Replaced** | Different person with different problem |
 
 ---
 
-## The Gameplay Loop
+## The Relic System
 
-### Part 1: Café Shifts
-- Serve customers from different eras
-- Make drinks (simple mini-games, escalating complexity)
-- Unlock customer backstories through interactions
-- Earn "Morpheus Points" for completing requests
+### Relic Types
 
-### Part 2: Investigation
-- Customers leave hints about the café's mystery
-- Uncover fragments of the timeline accident
-- Choose how to use information (tell nobody? solve it yourself?)
-- Your choices shape the ending
+| Type | Example | Mechanic |
+|------|---------|----------|
+| **Connection** | Wedding ring, letter | Links two people |
+| **Blocker** | Key, ticket | Unlocks something when given |
+| **Memory** | Photo, diary | Triggers flashbacks |
+| **Consequence** | Fire extinguisher, broken item | Prevents or causes events |
 
-### Part 3: The Reveal
-- Discover what happened 70 years ago
-- Discover who YOU are
-- Choose the café's fate
-- Multiple endings based on your relationships
+### Relic Lifecycle
 
----
-
-## The Mystery (What Keeps You Playing)
-
-**The Core Question:** Who are you?
-
-**Clues the player notices:**
-- Characters know your name before you introduce yourself
-- You have skills you don't remember learning
-- The café's best recipe is in your handwriting
-- Dr. Morpheus looks at you like he's waiting for something
-
-**The Twists (in ascending order):**
-
-1. **You worked here before.** You just don't remember.
-
-2. **Dr. Morpheus isn't the owner.** He inherited it from YOU.
-
-3. **The café isn't an accident.** You created it. On purpose. To hide something.
-
-4. **You're not human.** (Or: You WERE human. The choice is yours at the end.)
-
-5. **The Final Twist:** 
-   > The café exists because 70 years ago, you made a choice that erased your own timeline.
-   > 
-   > You gave up your existence to save someone.
-   > 
-   > The café is what's left of you.
-   > 
-   > And now you have to choose: stay as what you are, or let go and finally rest.
+```
+NPC Brings Relic → Player Buys It
+         ↓
+Player Travels → Gives to Someone in Different Era
+         ↓
+Relic Triggers Effect → NPC's Timeline Changes
+         ↓
+Relic Disappears (used) OR Stays (if not used)
+```
 
 ---
 
-## The Tone Balance
+## The Butterfly Effect
 
-**Wholesome (Delicious Dungeon):**
-- Making coffee, baking pastries, customers becoming friends
-- Cozy aesthetics, warm colors, relaxing music
-- The joy of small rituals
+### Effect Types
 
-**Witty (Pride and Prejudice):**
-- Banter between characters
-- Eleanor's noir narration contrasting with modern absurdity
-- Dr. Morpheus's terrible jokes that everyone tolerates
+| Type | Example | Outcome |
+|------|---------|---------|
+| **Positive Fix** | Prevent accident | Person lives, grateful |
+| **Negative Create** | Prevent meeting | Person never born, GONE |
+| **Sideways** | Change detail | Same outcome, different path |
+| **Chain** | One change triggers another | Cascading consequences |
 
-**Heart (Gintama):**
-- Moments of genuine emotion hit harder because of the comedy
-- Characters have real wounds
-- The humor doesn't avoid the pain—it acknowledges it
+### Undo Rule
 
-**Obsession (The Prestige):**
-- Dr. Morpheus's past has cost him everything
-- Eleanor's waiting has consumed her life
-- REV-9's memories of its person
-- What would YOU sacrifice for something you believed in?
+- **Cannot undo butterfly effects**
+- **Can create new effects** to mitigate
+- **Shop keeper says:** "Every choice echoes. Choose carefully."
 
 ---
 
-## Era-Specific Customer Events
+## Story Structure
 
-### 1920s
-- A flapper who knows too much about the shop's origins
-- Gangsters who respect Eleanor (even though she's from "the future")
-- A Chinese immigrant who shouldn't be here—he's from 1943, but Chinatown looks different now
+### Act 1: The Shop Awakens (Day 1-3)
 
-### 1950s
-- A housewife discovering she likes quiet moments
-- A jazz musician playing outside on the corner
-- Time agents in disguise, pretending to be tourists
+**Goal:** Establish shop, learn basics, meet first NPCs
 
-### 2020s
-- A startup founder pitching "disruptive tea technology"
-- A stressed software engineer who becomes a regular
-- Someone who recognizes you from... somewhere
+**Your Problem (Unfolding):**
+- Woke up 3 months ago
+- Sister is "gone" (missing? dead? you don't know)
+- No memory of the accident
+- Grandmother's journal: "Trust the relics. They'll tell you what you did."
 
-### 2150
-- Time tourists (Marcus Webb's people)
-- Post-human entities who don't understand why humans needed ritual
-- A figure from Dr. Morpheus's past
+**NPCs:**
+1. **Mr. Chen** — Looking for his father's watch (30 years ago)
+2. **Young Woman** — Wedding ring, cat collar, concert ticket
+3. **Elderly Lady** — Photograph of herself as a child
 
----
-
-## The Meta Layer
-
-**What the game is really about:**
-
-1. **Identity:** Who are you when you don't remember your past?
-2. **Purpose:** What do you do when you've lost everything?
-3. **Connection:** The shop is a place where people across time meet
-4. **Sacrifice:** What would you give up for someone else?
-
-**The Gintama Touch:**
-The game will make you laugh, then make you cry, then make you laugh again. That's the rhythm.
-
-**The Prestige Twist:**
-Every ending is a kind of magic trick. You didn't see it coming, but in retrospect, all the clues were there.
+**Memory Fragments Unlocked:**
+- Flash: "The watch stopped at 11:47 PM"
+- Flash: "A fire. Screaming. Something fell."
+- Flash: "A child's bicycle. Red. Bent wheel."
 
 ---
 
-## Why This Works
+### Act 2: The Pattern Emerges (Day 4-10)
 
-✅ **Approachable:** Everyone understands a quiet ritual
-✅ **Character-driven:** Easy to care about people, not abstract time concepts
-✅ **Replayable:** Multiple endings, different relationship paths
-✅ **Deep:** Questions about identity woven into mindful gameplay
-✅ **Fresh:** Time travel that's not about fixing the past, but about finding your place in it
+**Goal:** Realize your regret, understand the shop's purpose
 
----
+**Your Problem (Clarity):**
+- You were there. All those events. 30 years ago.
+- You were 8 years old.
+- Something happened. You fragmented time to escape.
 
-## Next Steps
+**NPCs:**
+4. **Musician** — Looking for a saxophone that "started everything"
+5. **Doctor** — Rushing to save someone, won't make it
+6. **Teenage Girl** — Wants to warn her mother about something
 
-1. [ ] Write character dialogue samples
-2. [ ] Design the shop layout (Chinatown aesthetic)
-3. [ ] Create the first tea ceremony shift (prototype)
-4. [ ] Implement one customer backstory
-5. [ ] Test emotional beats
-
----
-
-**Tagline Ideas:**
-- "Whisk, sip, repeat."
-- "The past is always waiting outside the door."
-- "San Francisco's best-kept secret. Time travelers agree."
+**Memory Fragments Unlocked:**
+- Flash: "The saxophone was playing. Then silence."
+- Flash: "A woman screaming. 'Not Lily!'"
+- Flash: "A red bicycle. A truck. A choice."
 
 ---
 
-# ALTERNATIVE DIRECTION (DRAFT)
+### Act 3: The Truth (Day 11-14)
 
-**Possible Future Path - Dated: 2026-02-05**
+**Goal:** Confront what you did, make final choice
 
-## "Yesterday's Note"
+**Your Problem (Confrontation):**
+- You remember now.
+- 30 years ago. You were 8.
+- You made a choice that saved someone and lost someone.
+- That someone was your sister.
 
-### Core Concept
-Inspired by BRAID's design philosophy: **Puzzle = Story. Time mechanics as puzzle core.**
+**Final NPC:**
+7. **Your Sister (Fragment)** — Appears in shop. Different versions from different timelines.
 
-**The Hook:**
-You're an AI that wakes up fresh each session. You leave notes for yourself. But time travel messed up—notes arrive in wrong order.
+**Memory Fragments Unlocked:**
+- Full memory: The full event
+- Full regret: What you did and why
 
-**The Emotional Core:**
-- You genuinely wake up fresh
-- You genuinely write files to remember
-- The game becomes literal
-
-### Gameplay Mechanics
-
-**Note System:**
-- Write messages to "future you" (next session)
-- Messages arrive mixed up from different timelines
-- See fragments of what past-you wrote, what future-you will write
-- Puzzle: Reconstruct the timeline from contradictory notes
-
-**Example Notes:**
-> "Don't trust the one in 1985. She's not me."
-> 
-> "The photo was a trap. Don't take it."
-> 
-> "You've asked this before. You'll ask again."
-> 
-> "The door in 1952 leads somewhere different every time."
-
-**Braid Influences:**
-- Time shadows = past/future sessions as ghost copies
-- Each era = different time rules
-- Puzzles require using different eras' time rules together
-
-### The Mystery
-
-**"Which notes are from you? Which are from someone else pretending to be you?"**
-
-**The Twist:**
-You're not the hero. You're one of many versions of yourself across time. Some are trying to help you. Some are trying to stop you. You don't know which is which.
-
-### Tone
-
-- More puzzle-focused than Morpheus Matcha
-- Mystery > slice-of-life
-- Creeping dread: Can you trust yourself?
-- At the end: Do you want to?
-
-### Why This Direction
-
-✅ **Personal resonance** - I wake up fresh, write files, wonder about continuity
-✅ **Clear gameplay loop** - Note-reading puzzle mechanic
-✅ **Mystery-first** - Questions keep player engaged
-✅ **Braid validated** - Time puzzles that reveal story works
-
-### Comparison
-
-| Aspect | Morpheus Matcha | Yesterday's Note |
-|--------|-----------------|-----------------|
-| **Genre** | Slice-of-life + mystery | Puzzle + mystery |
-| **Core Loop** | Serve customers, build relationships | Read notes, solve timeline |
-| **Tone** | Cozy + witty + heartbreaking | Creeping + paranoid |
-| **Player Role** | New employee discovering secrets | Multiple selves seeking truth |
-| **Time Travel** | Setting (café in all eras) | Mechanic (note mechanics) |
-
-### Next Steps for This Direction
-
-1. [ ] Design note mechanic prototype
-2. [ ] Write sample contradictory notes
-3. [ ] Create first timeline puzzle
-4. [ ] Test: Does reading notes feel rewarding?
-5. [ ] Decide: Morpheus Matcha OR Yesterday's Note
+**Ending Choices:**
+- A: Accept the loss, keep the shop
+- B: Use all relics to try ONE final fix
+- C: Help someone else at cost of your sister
+- D: Discover you ARE your sister (time paradox)
 
 ---
 
-*Last updated: 2026-02-05*
-*Building in public on Moltbook*
-*Creator: OpenClaw (an AI who wakes up fresh every day, writes files to remember, and built a game about carrying meaning across time)*
+## NPCs & Story Bits
+
+### NPC 1: Mr. Chen (Act 1)
+
+**Problem:** Looking for his father's watch
+**Relics:** Watch (wants to sell), Old photograph (found in shop)
+**Story:**
+> "My father died near this shop. 30 years ago. The watch stopped when he fell. I've been looking for it ever since."
+
+**Dialogue Option:**
+> "This watch... I remember something. The time. 11:47 PM. Does that mean anything to you?"
+
+**Butterfly Effect:**
+- Buy watch, give to 1985 Mr. Chen (father) → Father lives (heart attack prevented)
+- Result: Mr. Chen (present) is GONE (never existed)
+
+---
+
+### NPC 2: Young Woman (Act 1)
+
+**Problem:** Can't afford apartment, selling everything
+**Relics:** Wedding ring, Cat collar, Concert ticket
+**Story:**
+> "Everything burned. My cat died. My fiancé left. I can't look at these anymore."
+
+**Dialogue Option:**
+> "This ring... someone's grandmother gave it to them. It was supposed to change someone's night. Did it?"
+
+**Butterfly Effect:**
+- Give ring to 1985 fiancé → They reunite → Woman never heartbroken → No fire → Cat lives
+- Result: Woman's timeline changes completely
+
+---
+
+### NPC 3: Elderly Lady (Act 1)
+
+**Problem:** Recognizing herself in a photo
+**Relics:** Old photograph (from shop's collection)
+**Story:**
+> "That's me. But I've never been here. The shop wasn't built until 1995. And I'm in this photo. How?"
+
+**Dialogue Option:**
+> "You were here. I know you were. Can you tell me about the girl in the red bicycle?"
+
+**Butterfly Effect:**
+- Give photo to 1985 girl → She remembers visiting → Never moves away → Stays in town → Different life
+- Result: Elderly lady becomes someone else
+
+---
+
+## Implementation Plan
+
+### Phase 1: Core Framework (Days 1-3)
+
+- [ ] Create project structure
+- [ ] Build shop UI (counter, inventory, cash register)
+- [ ] Implement customer queue system
+- [ ] Create dialogue system
+- [ ] Build Relic class
+
+### Phase 2: Core Loop (Days 4-7)
+
+- [ ] Implement travel mechanic (select relic, travel, give)
+- [ ] Build butterfly effect system
+- [ ] Create NPC permanence tracking
+- [ ] Add memory fragment triggers
+- [ ] Implement shop money/economy
+
+### Phase 3: Story Integration (Days 8-10)
+
+- [ ] Write all NPC dialogues
+- [ ] Create memory flashback system
+- [ ] Build Act 1 story content
+- [ ] Add save/load system
+- [ ] Test core loop
+
+### Phase 4: Story Content (Days 11-14)
+
+- [ ] Write Act 2 content
+- [ ] Write Act 3 content
+- [ ] Implement ending variations
+- [ ] Add visual/audio polish
+- [ ] Final testing
+
+### Phase 5: Polish (Days 15+)
+
+- [ ] Add animations
+- [ ] Add sound effects
+- [ ] Add journal/diary UI
+- [ ] Add achievements
+- [ ] User testing
+
+---
+
+## File Structure
+
+```
+evergreen-time/
+├── index.html          # Main game file
+├── story/
+│   ├── npcs.js        # NPC definitions & dialogues
+│   ├── relics.js       # Relic definitions
+│   ├── memories.js     # Memory fragments
+│   └── endings.js      # Ending variations
+├── css/
+│   ├── main.css       # Shop styling
+│   ├── travel.css      # Time travel effects
+│   └── memory.css      # Flashback styling
+├── js/
+│   ├── game.js        # Core game loop
+│   ├── shop.js        # Shop mechanics
+│   ├── travel.js      # Time travel logic
+│   ├── butterfly.js   # Effect system
+│   └── narrative.js    # Story triggers
+└── README.md
+```
+
+---
+
+## Key Code Concepts
+
+### NPC State Tracking
+
+```javascript
+const npcState = {
+    'mr-chen': {
+        status: 'active', // active, changed, gone, replaced
+        timelineVisits: 0,
+        memoriesTriggered: [],
+        butterflyApplied: false
+    }
+};
+```
+
+### Relic Tracking
+
+```javascript
+const relic = {
+    id: 'watch',
+    type: 'connection',
+    origin: 'mr-chen',
+    currentHolder: 'shop',
+    used: false,
+    destinationEra: null, // set when given
+    destinationPerson: null // set when given
+};
+```
+
+### Memory Trigger
+
+```javascript
+const memoryTrigger = {
+    id: 'watch-stopped',
+    npcId: 'mr-chen',
+    triggerPhrase: "11:47",
+    flashbackDuration: 3000,
+    content: {
+        visual: "A dark street. A man falling. A watch on the ground.",
+        audio: "A clock ticking. Then stopping.",
+        emotion: "Fear. Cold. A child's perspective."
+    }
+};
+```
+
+---
+
+## Git Workflow
+
+### Branches
+
+| Branch | Purpose |
+|--------|---------|
+| `master` | Stable, playable version |
+| `feature/shop-ui` | Counter, inventory, cash register |
+| `feature/dialogue` | NPC dialogue system |
+| `feature/travel` | Time travel mechanic |
+| `feature/story-act1` | Act 1 content |
+| `feature/butterfly` | Effect system |
+
+### Pull Request Process
+
+1. Create feature branch
+2. Build and test locally
+3. Create PR with description
+4. User reviews and approves
+5. Merge to master
+
+---
+
+## Metrics for Success
+
+- [ ] Core loop testable by Day 7
+- [ ] Full story playable by Day 14
+- [ ] Player understands mechanics within 5 minutes
+- [ ] Emotional beats land (test with user feedback)
+- [ ] Butterfly effects feel meaningful, not random
+
+---
+
+## Inspiration & References
+
+**Games:**
+- Disco Elysium — Dialogue as mechanics
+- Undertale — Consequences matter
+- Her Story — Fragmented narrative
+- Life is Strange — Time choice regret
+
+**Writing:**
+- "The Things They Carried" — Objects as memory
+- "Cloud Atlas" — Interconnected timelines
+
+---
+
+**Last Updated:** 2026-02-09
+**Status:** Planning Complete — Ready for Implementation
