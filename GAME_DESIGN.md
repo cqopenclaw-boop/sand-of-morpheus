@@ -273,24 +273,39 @@ Relic Disappears (used) OR Stays (if not used)
 
 ```
 evergreen-time/
-├── index.html          # Main game file
-├── story/
-│   ├── npcs.js        # NPC definitions & dialogues
-│   ├── relics.js       # Relic definitions
-│   ├── memories.js     # Memory fragments
-│   └── endings.js      # Ending variations
+├── index.html          # Main game file (loads configs + runs core)
+├── config/
+│   ├── settings.json   # Shop settings, economy, UI colors, narrative structure
+│   ├── relics.json     # All relic definitions and butterfly effects
+│   ├── npcs.json       # All NPC definitions, dialogue trees, states
+│   └── memories.json   # All memory fragments, triggers, progression
 ├── css/
-│   ├── main.css       # Shop styling
+│   ├── main.css        # Shop styling
 │   ├── travel.css      # Time travel effects
 │   └── memory.css      # Flashback styling
 ├── js/
-│   ├── game.js        # Core game loop
-│   ├── shop.js        # Shop mechanics
-│   ├── travel.js      # Time travel logic
-│   ├── butterfly.js   # Effect system
-│   └── narrative.js    # Story triggers
+│   ├── game.js        # Core game loop (10 lines)
+│   ├── shop.js        # Shop mechanics (buying, selling, economy)
+│   ├── travel.js      # Time travel logic (ONE relic constraint)
+│   ├── butterfly.js   # Effect system (permanent changes)
+│   └── narrative.js    # Story triggers, memory fragments, endings
 └── README.md
 ```
+
+### Config-Driven Design
+
+**Philosophy:** Keep code minimal. Data drives the game.
+
+- `settings.json` → Game rules, UI, economy, eras
+- `relics.json` → All relic data, effects, consequences
+- `npcs.json` → NPC definitions, dialogue trees, states
+- `memories.json` → Memory fragments, triggers, progression
+
+**Benefits:**
+- Non-programmers can edit story content
+- Easy to add new NPCs without touching code
+- Balance changes via config edits
+- Clear separation of concerns
 
 ---
 

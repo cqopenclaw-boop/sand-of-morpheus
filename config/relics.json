@@ -1,0 +1,195 @@
+{
+  "relics": [
+    {
+      "id": "wedding-ring",
+      "name": "Antique Wedding Ring",
+      "description": "A simple gold band with an inscription inside: 'Forever, 1985'",
+      "type": "connection",
+      "originNpc": "young-woman",
+      "originEra": "2024",
+      "destinationEra": "1985",
+      "destinationPerson": "fiance",
+      "effect": "reunite",
+      "butterflyConsequence": {
+        "npcAffected": "young-woman",
+        "changeType": "gone",
+        "newTimeline": "She never experiences the fire because she's still with her husband"
+      },
+      "memoryTrigger": {
+        "phrase": "fire",
+        "memoryId": "fire-accident",
+        "intensity": 3
+      }
+    },
+    {
+      "id": "cat-collar",
+      "name": "Red Cat Collar",
+      "description": "A faded red collar with a small bell. The tag reads 'Luna'",
+      "type": "memory",
+      "originNpc": "young-woman",
+      "originEra": "2024",
+      "destinationEra": "2024-morning",
+      "destinationPerson": "young-woman-morning",
+      "effect": "prevent",
+      "butterflyConsequence": {
+        "npcAffected": "young-woman",
+        "changeType": "changed",
+        "newDialogue": "I'm so glad I got home early that day. Luna was waiting by the door as always."
+      },
+      "memoryTrigger": {
+        "phrase": "cat",
+        "memoryId": "cat-luna",
+        "intensity": 2
+      }
+    },
+    {
+      "id": "concert-ticket",
+      "name": "Concert Ticket Stub",
+      "description": "June 15, 2024. The Night Everything Changed. General Admission.",
+      "type": "consequence",
+      "originNpc": "young-woman",
+      "originEra": "2024",
+      "destinationEra": "2024-evening",
+      "destinationPerson": "young-woman-evening",
+      "effect": "witness",
+      "butterflyConsequence": {
+        "npcAffected": "young-woman",
+        "changeType": "replaced",
+        "newNpc": {
+          "name": "Unknown Woman",
+          "dialogue": "I don't know why I'm here. I was supposed to be somewhere else tonight.",
+          "problem": "Lost. Confused. Looking for someone she can't remember."
+        }
+      },
+      "memoryTrigger": {
+        "phrase": "ticket",
+        "memoryId": "concert-night",
+        "intensity": 4
+      }
+    },
+    {
+      "id": "watch",
+      "name": "Pocket Watch",
+      "description": "An old pocket watch. The hands stopped at 11:47 PM.",
+      "type": "memory",
+      "originNpc": "mr-chen",
+      "originEra": "2024",
+      "destinationEra": "1994",
+      "destinationPerson": "mr-chen-father",
+      "effect": "prevent-death",
+      "butterflyConsequence": {
+        "npcAffected": "mr-chen",
+        "changeType": "gone",
+        "newTimeline": "His father lived. Mr. Chen was never born."
+      },
+      "memoryTrigger": {
+        "phrase": "watch",
+        "memoryId": "watch-stopped",
+        "intensity": 5
+      }
+    },
+    {
+      "id": "photograph",
+      "name": "Old Photograph",
+      "description": "A sepia photograph of a young girl in front of this shop. The shop wasn't built until 1995.",
+      "type": "mystery",
+      "originNpc": "elderly-lady",
+      "originEra": "2024",
+      "destinationEra": "1975",
+      "destinationPerson": "shop-builder",
+      "effect": "reveal",
+      "butterflyConsequence": {
+        "npcAffected": "elderly-lady",
+        "changeType": "gone",
+        "newTimeline": "She never moved away. She's still in town, living a different life."
+      },
+      "memoryTrigger": {
+        "phrase": "photograph",
+        "memoryId": "girl-bicycle",
+        "intensity": 3
+      }
+    },
+    {
+      "id": "saxophone",
+      "name": "Vintage Saxophone",
+      "description": "A gleaming brass saxophone. Someone engraved 'For M.W. - You were always meant to play'",
+      "type": "connection",
+      "originNpc": "musician",
+      "originEra": "2024",
+      "destinationEra": "1958",
+      "destinationPerson": "young-marcus",
+      "effect": "origin",
+      "butterflyConsequence": {
+        "npcAffected": "marcus-webb",
+        "changeType": "replaced",
+        "newNpc": {
+          "name": "Marcus Webb",
+          "dialogue": "I remember playing at the Blue Note. But someone else is in my memories now. Someone who never picked up the horn.",
+          "problem": "He found the saxophone but never learned to play. His life took a different path."
+        }
+      },
+      "memoryTrigger": {
+        "phrase": "saxophone",
+        "memoryId": "music-stopped",
+        "intensity": 4
+      }
+    },
+    {
+      "id": "medical-file",
+      "name": "Medical Emergency File",
+      "description": "A man's file. Name: David Chen. DOB: 1960. Cause of death: Cardiac arrest, 11:45 PM, 1994.",
+      "type": "consequence",
+      "originNpc": "doctor",
+      "originEra": "2024",
+      "destinationEra": "1994",
+      "destinationPerson": "doctor-1994",
+      "effect": "information",
+      "butterflyConsequence": {
+        "npcAffected": "doctor",
+        "changeType": "changed",
+        "newDialogue": "I saved him that night. The file arrived just in time. His wife... she still writes to me every year."
+      },
+      "memoryTrigger": {
+        "phrase": "file",
+        "memoryId": "hospital-lights",
+        "intensity": 4
+      }
+    },
+    {
+      "id": "letter",
+      "name": "Unsent Letter",
+      "description": "A yellowed letter addressed to 'My Dearest' but never sealed.",
+      "type": "connection",
+      "originNpc": "teenage-girl",
+      "originEra": "2024",
+      "destinationEra": "2004",
+      "destinationPerson": "teenage-mother",
+      "effect": "warning",
+      "butterflyConsequence": {
+        "npcAffected": "teenage-girl",
+        "changeType": "changed",
+        "newDialogue": "I gave her the letter. She never made that drive. She's still alive."
+      },
+      "memoryTrigger": {
+        "phrase": "letter",
+        "memoryId": "red-bicycle",
+        "intensity": 3
+      }
+    }
+  ],
+  "shopInventory": {
+    "initial": ["photograph", "letter"],
+    "purchaseCost": {
+      "connection": 50,
+      "memory": 30,
+      "consequence": 40,
+      "mystery": 25
+    },
+    "sellingPrice": {
+      "connection": 150,
+      "memory": 80,
+      "consequence": 100,
+      "mystery": 60
+    }
+  }
+}

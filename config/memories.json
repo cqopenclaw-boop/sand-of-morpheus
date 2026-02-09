@@ -1,0 +1,219 @@
+{
+  "memories": [
+    {
+      "id": "fire-accident",
+      "triggerPhrase": "fire",
+      "intensity": 3,
+      "visual": {
+        "scene": "A dark street. Orange light flickering. Smoke rising.",
+        "details": ["A red plastic bag burning", "Someone screaming", "A cat collar on the ground"]
+      },
+      "audio": {
+        "ambient": "Crackling fire, distant sirens",
+        "dialogue": "Not the cat! LUNA!"
+      },
+      "emotion": {
+        "primary": "guilt",
+        "secondary": ["fear", "helplessness"]
+      },
+      "narrativeContext": {
+        "connection": "The fire that destroyed Sarah's apartment. You were there. You couldn't save everyone."
+      }
+    },
+    {
+      "id": "watch-stopped",
+      "triggerPhrase": "watch",
+      "intensity": 5,
+      "visual": {
+        "scene": "A dark street. Rain falling. A man on the ground.",
+        "details": ["A pocket watch on the wet pavement", "Hands frozen at 11:47", "A young boy standing nearby"]
+      },
+      "audio": {
+        "ambient": "Rain hitting pavement, distant thunder",
+        "dialogue": "Daddy! DADDY!"
+      },
+      "emotion": {
+        "primary": "trauma",
+        "secondary": ["loss", "witnessing"]
+      },
+      "narrativeContext": {
+        "connection": "The night David Chen's father died. You watched. The watch stopped. The boy was David. And you were there."
+      }
+    },
+    {
+      "id": "cat-luna",
+      "triggerPhrase": "cat",
+      "intensity": 2,
+      "visual": {
+        "scene": "A lit apartment. Warm light. A red collar on a hook.",
+        "details": ["A gray cat sleeping on a windowsill", "A woman humming", "The time: 6:30 PM"]
+      },
+      "audio": {
+        "ambient": "Purring, soft music",
+        "dialogue": "Luna, I'm home! ...Luna?"
+      },
+      "emotion": {
+        "primary": "warmth",
+        "secondary": ["loss", "regret"]
+      },
+      "narrativeContext": {
+        "connection": "The cat that died in the fire. If Sarah had been five minutes earlier, Luna would have been safe."
+      }
+    },
+    {
+      "id": "concert-night",
+      "triggerPhrase": "ticket",
+      "intensity": 4,
+      "visual": {
+        "scene": "A concert venue. Smoke machines, colored lights. A stage.",
+        "details": ["A ticket stub on the floor", "Two people arguing", "A woman walking away"]
+      },
+      "audio": {
+        "ambient": "Music fading, crowd murmuring",
+        "dialogue": "I waited. You didn't come. Maybe... maybe it's not meant to be."
+      },
+      "emotion": {
+        "primary": "regret",
+        "secondary": ["missed-connection", "what-if"]
+      },
+      "narrativeContext": {
+        "connection": "The concert Sarah was supposed to go to with her fiancé. He didn't show. She got angry. She left. And then..."
+      }
+    },
+    {
+      "id": "girl-bicycle",
+      "triggerPhrase": "bicycle",
+      "intensity": 4,
+      "visual": {
+        "scene": "A quiet suburban street. Afternoon light.",
+        "details": ["A red bicycle with a bent wheel", "A girl getting ready to ride", "A car turning the corner"]
+      },
+      "audio": {
+        "ambient": "Birds chirping, car engine",
+        "dialogue": "Mommy said I could ride to the park!"
+      },
+      "emotion": {
+        "primary": "foreboding",
+        "secondary": ["childhood", "danger"]
+      },
+      "narrativeContext": {
+        "connection": "The girl in the photograph. Margaret. The red bicycle. Something happened on this street."
+      }
+    },
+    {
+      "id": "music-stopped",
+      "triggerPhrase": "music",
+      "intensity": 3,
+      "visual": {
+        "scene": "A jazz club. Blue lights. Smoke curling.",
+        "details": ["A saxophone on a stool", "A man reaching for it", "Another man watching"]
+      },
+      "audio": {
+        "ambient": "Jazz piano, clinking glasses",
+        "dialogue": "For you, M.W. You were always meant to play."
+      },
+      "emotion": {
+        "primary": "confusion",
+        "secondary": ["identity", "destiny"]
+      },
+      "narrativeContext": {
+        "connection": "The saxophone that made Marcus famous. Someone else was supposed to play it."
+      }
+    },
+    {
+      "id": "hospital-lights",
+      "triggerPhrase": "hospital",
+      "intensity": 4,
+      "visual": {
+        "scene": "Hospital hallway. Bright fluorescent lights. A clock.",
+        "details": ["Doctors rushing", "A file on a desk", "The time: 11:43 PM"]
+      },
+      "audio": {
+        "ambient": "Beeping monitors, PA system",
+        "dialogue": "We need that file! His blood type..."
+      },
+      "emotion": {
+        "primary": "urgency",
+        "secondary": ["life-death", "information"]
+      },
+      "narrativeContext": {
+        "connection": "Dr. Park's emergency. The file that could save a life. 11:47 PM - the same time the watch stopped."
+      }
+    },
+    {
+      "id": "red-bicycle",
+      "triggerPhrase": "red",
+      "intensity": 3,
+      "visual": {
+        "scene": "A dark road. Headlights. A bicycle on the road.",
+        "details": ["A red bicycle blocking the path", "Brakes screeching", "A woman's scream"]
+      },
+      "audio": {
+        "ambient": "Car engine stopping, silence",
+        "dialogue": "Oh god. Oh god, there's a child..."
+      },
+      "emotion": {
+        "primary": "dread",
+        "secondary": ["accident", "prevention"]
+      },
+      "narrativeContext": {
+        "connection": "The car accident. The red bicycle. A warning that came too late. And a letter that was never sent."
+      }
+    },
+    {
+      "id": "lily-final",
+      "triggerPhrase": "lily",
+      "intensity": 5,
+      "visual": {
+        "scene": "A child's bedroom. Nightlight glowing. A woman tucking in a girl.",
+        "details": ["A little girl with dark hair", "A woman singing softly", "A clock showing 11:40 PM"]
+      },
+      "audio": {
+        "ambient": "Soft singing, night sounds",
+        "dialogue": "I'll always protect you, Lily. Always."
+      },
+      "emotion": {
+        "primary": "love",
+        "secondary": ["loss", "promises"]
+      },
+      "narrativeContext": {
+        "connection": "Your sister. Lily. The promise you made. And the choice you had to make."
+      }
+    },
+    {
+      "id": "the-choice",
+      "triggerPhrase": "choice",
+      "intensity": 5,
+      "visual": {
+        "scene": "A crossroads. Two paths. Two people.",
+        "details": ["A boy standing at the crossroads", "Two figures in shadow", "A temporal rift glowing"]
+      },
+      "audio": {
+        "ambient": ["Temporal distortion", "Whispering", "A heartbeat"],
+        "dialogue": "Choose. Only one can come through."
+      },
+      "emotion": {
+        "primary": "sacrifice",
+        "secondary": ["impossible", "lasting"]
+      },
+      "narrativeContext": {
+        "connection": "The choice. The one you made. The one that broke time. And the one who was lost."
+      }
+    }
+  ],
+  "memoryProgression": {
+    "act1": ["fire-accident", "watch-stopped", "cat-luna", "concert-night", "girl-bicycle"],
+    "act2": ["music-stopped", "hospital-lights", "red-bicycle"],
+    "act3": ["lily-final", "the-choice"]
+  },
+  "unlockConditions": {
+    "lily-final": {
+      "requiredMemories": ["fire-accident", "watch-stopped", "girl-bicycle"],
+      "minimumVisits": 5
+    },
+    "the-choice": {
+      "requiredMemories": ["lily-final"],
+      "minimumVisits": 7
+    }
+  }
+}

@@ -1,0 +1,302 @@
+{
+  "npcs": [
+    {
+      "id": "young-woman",
+      "name": "Sarah Mitchell",
+      "avatar": "👩",
+      "era": "2024",
+      "eraDisplay": "Present Day",
+      "status": "active",
+      "firstVisit": true,
+      "problem": "Lost everything in a fire. Can't afford apartment.",
+      "dialogue": [
+        {
+          "id": "arrival",
+          "text": "I... I don't know where else to go. Everything I owned is in a plastic bag right now.",
+          "hint": "She clutches a red plastic bag tightly."
+        },
+        {
+          "id": "story",
+          "text": "Three things survived. This ring, this collar, this ticket. They don't mean anything to me anymore. But I can't throw them away either. Does that make sense?",
+          "choices": [
+            {
+              "playerChoice": "Tell me about the items.",
+              "response": "The ring was my grandmother's. She gave it to me before... before everything. I was supposed to give it to him. But he didn't show up.",
+              "memoryTrigger": "fire"
+            },
+            {
+              "playerChoice": "What happened?",
+              "response": "I was late coming home from work. Five minutes. If I'd been there five minutes earlier...",
+              "memoryTrigger": "cat"
+            },
+            {
+              "playerChoice": "I'm sorry. Can I help?",
+              "response": "I just need... I don't know. Someone to tell me these things mean something. Or nothing. Either way."
+            }
+          ]
+        },
+        {
+          "id": "leaving",
+          "text": "Thank you. For listening. I think... I think I needed to tell someone."
+        }
+      ],
+      "relics": ["wedding-ring", "cat-collar", "concert-ticket"],
+      "relicsToSell": [],
+      "butterflyState": {
+        "applied": false,
+        "type": null,
+        "newDialogue": null,
+        "newName": null
+      }
+    },
+    {
+      "id": "mr-chen",
+      "name": "David Chen",
+      "avatar": "👨‍🦳",
+      "era": "2024",
+      "eraDisplay": "Present Day",
+      "status": "active",
+      "firstVisit": false,
+      "visits": 3,
+      "problem": "Looking for his father's watch. 30 years of searching.",
+      "dialogue": [
+        {
+          "id": "arrival",
+          "text": "I come here every year. On the anniversary. It's been 30 years now.",
+          "hint": "He leans on a cane, looking tired."
+        },
+        {
+          "id": "story",
+          "text": "My father died near here. The watch... it stopped when he fell. I've been looking for it ever since. Stupid, isn't it? A watch won't bring him back.",
+          "choices": [
+            {
+              "playerChoice": "Tell me about your father.",
+              "response": "He was a good man. A doctor. He was rushing to save someone when it happened. A heart attack. Someone he couldn't reach in time.",
+              "memoryTrigger": "watch"
+            },
+            {
+              "playerChoice": "The watch - what happened to it?",
+              "response": "Lost in the chaos. The paramedics took everything. But I keep dreaming about it. The hands stopped at 11:47.",
+              "memoryTrigger": "watch"
+            }
+          ]
+        }
+      ],
+      "relics": ["watch"],
+      "relicsToSell": ["photograph"],
+      "butterflyState": {
+        "applied": false,
+        "type": null,
+        "newDialogue": null,
+        "newName": null
+      }
+    },
+    {
+      "id": "elderly-lady",
+      "name": "Margaret Cole",
+      "avatar": "👵",
+      "era": "2024",
+      "eraDisplay": "Present Day",
+      "status": "active",
+      "firstVisit": false,
+      "visits": 2,
+      "problem": "Recognizes herself in a photograph taken before the shop existed.",
+      "dialogue": [
+        {
+          "id": "arrival",
+          "text": "This might sound strange, but... have you seen this photograph before?",
+          "hint": "She holds an old sepia photograph with trembling hands."
+        },
+        {
+          "id": "story",
+          "text": "That's me. But I've never been here. This shop wasn't built until 1995. And I'm... I'm much older than this now.",
+          "choices": [
+            {
+              "playerChoice": "That's you? When was it taken?",
+              "response": "I don't know. I found it in my mother's things after she passed. 1975, maybe? But I don't remember ever visiting this street.",
+              "memoryTrigger": "photograph"
+            },
+            {
+              "playerChoice": "Do you remember a red bicycle?",
+              "response": "A red bicycle... yes. No. Maybe? The memories are so confusing now.",
+              "memoryTrigger": "bicycle"
+            }
+          ]
+        }
+      ],
+      "relics": ["photograph"],
+      "relicsToSell": [],
+      "butterflyState": {
+        "applied": false,
+        "type": null,
+        "newDialogue": null,
+        "newName": null
+      }
+    },
+    {
+      "id": "musician",
+      "name": "Marcus Webb",
+      "avatar": "🎷",
+      "era": "2024",
+      "eraDisplay": "Present Day",
+      "status": "active",
+      "firstVisit": true,
+      "problem": "Famous jazz musician looking for the saxophone that made him famous.",
+      "dialogue": [
+        {
+          "id": "arrival",
+          "text": "They say you find strange things here. I'm looking for something that shouldn't exist anymore.",
+          "hint": "He wears expensive clothes but looks haunted."
+        },
+        {
+          "id": "story",
+          "text": "I became famous because of this saxophone. But I don't remember getting it. One night I had nothing. The next, I had this. And everyone knew my name.",
+          "choices": [
+            {
+              "playerChoice": "What do you remember?",
+              "response": "A club. Smoke. Someone handing me a case. And then... nothing. I woke up famous.",
+              "memoryTrigger": "saxophone"
+            },
+            {
+              "playerChoice": "Who gave it to you?",
+              "response": "I don't know. The memories are like trying to hold water. There's someone else's face there. Someone who wanted to play but never did.",
+              "memoryTrigger": "music"
+            }
+          ]
+        }
+      ],
+      "relics": ["saxophone"],
+      "relicsToSell": ["letter"],
+      "butterflyState": {
+        "applied": false,
+        "type": null,
+        "newDialogue": null,
+        "newName": null
+      }
+    },
+    {
+      "id": "doctor",
+      "name": "Dr. Lisa Park",
+      "avatar": "👩‍⚕️",
+      "era": "2024",
+      "eraDisplay": "Present Day",
+      "status": "active",
+      "firstVisit": true,
+      "problem": "Rushing to save someone. Won't make it in time. Needs something.",
+      "dialogue": [
+        {
+          "id": "arrival",
+          "text": "I have eleven minutes. Eleven minutes to save a man's life. And I'm standing here talking to you.",
+          "hint": "She looks desperate, checking her watch repeatedly."
+        },
+        {
+          "id": "story",
+          "text": "Cardiac arrest. He's 45 minutes away. If I had any information... a file, anything that could tell me what caused this...",
+          "choices": [
+            {
+              "playerChoice": "Is there a medical file?",
+              "response": "His family said there's a file at the hospital. But the system crashed. I can't access it.",
+              "memoryTrigger": "file"
+            },
+            {
+              "playerChoice": "Go. I'll find something.",
+              "response": "Thank you. I... I don't know why I came here. Old habits, I suppose."
+            }
+          ]
+        }
+      ],
+      "relics": ["medical-file"],
+      "relicsToSell": ["cat-collar"],
+      "butterflyState": {
+        "applied": false,
+        "type": null,
+        "newDialogue": null,
+        "newName": null
+      }
+    },
+    {
+      "id": "teenage-girl",
+      "name": "Emily Torres",
+      "avatar": "🧑",
+      "era": "2024",
+      "eraDisplay": "Present Day",
+      "status": "active",
+      "firstVisit": true,
+      "problem": "Wants to warn her mother about something. But she's from a different timeline.",
+      "dialogue": [
+        {
+          "id": "arrival",
+          "text": "This is going to sound insane, but... I'm not supposed to be here. Not really.",
+          "hint": "She looks around nervously, like she's not sure where she is."
+        },
+        {
+          "id": "story",
+          "text": "There's something I need to tell my mother. About a drive. A wrong turn. A red light. But I'm from... I'm from somewhere that didn't happen.",
+          "choices": [
+            {
+              "playerChoice": "Your mother - where is she?",
+              "response": "She's still alive. In another life. I watched her die. This time I'm going to save her.",
+              "memoryTrigger": "letter"
+            },
+            {
+              "playerChoice": "I can help. Tell me more.",
+              "response": "There's a letter. I was supposed to write it. But I was so angry. And then it was too late."
+            }
+          ]
+        }
+      ],
+      "relics": ["letter"],
+      "relicsToSell": ["medical-file"],
+      "butterflyState": {
+        "applied": false,
+        "type": null,
+        "newDialogue": null,
+        "newName": null
+      }
+    },
+    {
+      "id": "sister-final",
+      "name": "Lily",
+      "avatar": "👧",
+      "era": "1994",
+      "eraDisplay": "1994",
+      "status": "active",
+      "firstVisit": false,
+      "visits": 0,
+      "problem": "The final NPC. Appears only after all memories are unlocked.",
+      "dialogue": [
+        {
+          "id": "arrival",
+          "text": "Do you remember me?",
+          "hint": "A young girl stands in the doorway. She looks exactly like the photographs."
+        },
+        {
+          "id": "story",
+          "text": "You were there that night. I was so scared. And then... you made a choice.",
+          "choices": [
+            {
+              "playerChoice": "Lily? You're real?",
+              "response": "I was real. I am real. But you changed things. And now I don't know if I'm supposed to be here."
+            },
+            {
+              "playerChoice": "I remember. I chose wrong.",
+              "response": "You didn't choose wrong. You chose. And that's what matters."
+            }
+          ]
+        },
+        {
+          "id": "ending",
+          "text": "The shop needs someone to remember. Will you stay?"
+        }
+      ],
+      "relics": [],
+      "relicsToSell": [],
+      "butterflyState": {
+        "applied": false,
+        "type": null,
+        "newDialogue": null,
+        "newName": null
+      }
+    }
+  ]
+}
